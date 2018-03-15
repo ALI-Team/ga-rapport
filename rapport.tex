@@ -47,6 +47,7 @@ Inom datavetenskap beskrivs träd som en form av datastruktur för att represent
 \subsubsection{Implementation av syntaxträd}
 Trädet i sig utgår från en rotnod (eng. rootnode). I vårt fall är denna nod alltid ett likhetstecken (\(=\)), eftersom det är där ekvationen utgår ifrån. Precis som t.ex. en operatörsnod kan rotnoden anta två subnoder (I detta fall måste två noder antas, en för VL och en för HL). Därefter kan leden byggas upp av olika sorters noder.
 \subsubsection{Noder}
+\label{subsubsec:noder}
 En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)), funktion (e.x. \(log\), \(sin\)) eller operator (e.x. \(+\), \(-\), \(\times\), \(\div\), \string^). Om noden är sådan att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde (\(+\) har ej ett värde utan två siffror på vardera sida av sig.) så kan noden själv anta noder (s.k. barnnoder, eng. childnodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
 \begin{figure}[h]
   %24
@@ -63,4 +64,17 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste den okända vari
   \caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\).}
   \label{fig:2132}
 \end{figure}
+\subsection{Allmänt om förenkling}
+Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
+\subsection{Homogena noder}
+Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se 2.4 Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
+\subsubsection{Allmän förenkling av homogena noder}
+\begin{figure}[h]
+  %22
+  \centering
+  \includegraphics[width=0.3\textwidth]{image22}
+  \caption{\((a + b + c + d + e)\) tolkat av programmet.}
+  \label{fig:2311}
+\end{figure}
+Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Detta gäller dock endast för noder med numeriska värden. Hur enhetsnoder (se \ref{subsubsec:noder} för förklaring av enhetsnod) hanteras är dock olika för varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.
 \end{document}
