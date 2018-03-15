@@ -201,6 +201,7 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vil
 För att läsa in uttryck på normal form och för att enkelt omvandla de till abstrakta syntaxträd krävs en lexikalisk analys av den inmatade datan som sedan tolkas av en parser. Att hantera lexikalisk analys och att utveckla en parser ligger utanför projektet. Därför användes biblioteket purplex, som utför denna lexikaliska analys och har en inbyggd parser.
 
 \subsubsection{Lexikalisk analys}
+\label{subsubsec:lexikaliskanal}
 En lexer separerar den inmatade datan till s.k. tokens baserat på fördefinierade mönster och bygger upp en array (lista) baserad på dessa tokens. Med andra ord letar en lexer efter ett sorts mönster i indatan och fyller på array-en med motsvarande tokens. Tokens känns igen med hjälp av mönstermatchningsspråket regex. Nedan visas en tabell över vilka mönster som letas efter och vad de ersätts med i listan i den lexikaliska analysen. 
 Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd \(x\)], [addition], [värde, 10], [likhetstecken], [värde, 20])
 
@@ -222,5 +223,18 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd \(x\)], [addition], [vär
   \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
   \label{tab:lexer_patterns}
 \end{figure}
+
+\subsubsection{Parser}
+Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen (se \ref{subsubsec:lexikaliskanal} Lexikalisk analys). Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras. 
+
+\subsection{Bilder på träd}
+Bilderna på träden som används relativt ofta i denna rapport är också del av GAMLP, som har möjligheten att generera bilder av träd. Dessa genereras med hjälp av biblioteket graphviz. För varje träd går programmet igenom trädet uppifrån och ner och skapar listor med alla noder och kanter. Programmet beskriver sedan kod med dotsyntax, som sedan tolkas med programmet dot för att generera en bild på trädet.
+
+\subsection{Källor}
+\subsubsection{Struktur}
+Strukturen av projektet baserades till viss del på ett examensarbete vid namn Constructing a Computer Algebra System Capable of Generating Pedagogical Step-by-Step Solutions skriven av Dimitrij Lioubartsev (KTH, 2016). Syftet med detta examensarbete är att modifiera ett existerande bibliotek för symbolhantering, SymPy, så att det kan generera stegen som krävs för att kunna lösa en ekvation. Detta var givetvis ej syftet med vårt gymnasiearbete, men examensarbetet gick in i detalj hur en symbolhanterare kan fungera (kapitel 3). Denna text användes för källa då den kändes relevant till vårt arbete. Så som vi kunde använda den för inspiration för hur arbetet skulle läggas upp användes den också som exempel på hur själva rapporten kunde se ut.
+
+\subsubsection{Multinomial}
+Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \end{document}
