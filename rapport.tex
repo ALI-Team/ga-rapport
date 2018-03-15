@@ -197,4 +197,11 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vil
   \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
 \end{figure}
 
+\subsection{Tolkning av inmatade ekvationer}
+För att läsa in uttryck på normal form och för att enkelt omvandla de till abstrakta syntaxträd krävs en lexikalisk analys av den inmatade datan som sedan tolkas av en parser. Att hantera lexikalisk analys och att utveckla en parser ligger utanför projektet. Därför användes biblioteket purplex, som utför denna lexikaliska analys och har en inbyggd parser.
+
+\subsubsection{Lexikalisk analys}
+En lexer separerar den inmatade datan till s.k. tokens baserat på fördefinierade mönster och bygger upp en array (lista) baserad på dessa tokens. Med andra ord letar en lexer efter ett sorts mönster i indatan och fyller på array-en med motsvarande tokens. Tokens känns igen med hjälp av mönstermatchningsspråket regex. Nedan visas en tabell över vilka mönster som letas efter och vad de ersätts med i listan i den lexikaliska analysen. 
+Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd \(x\)], [addition], [värde, 10], [likhetstecken], [värde, 20])
+
 \end{document}
