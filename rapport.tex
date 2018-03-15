@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{mathtools}
+\usepackage{subcaption}
 
 \graphicspath{ {images/} }
 
@@ -24,7 +25,7 @@
 \maketitle
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{image27}
+  \includegraphics[width=0.7\textwidth]{image27}
   %\caption{Välj en olämplig bild}
 \end{figure}
 \newpage
@@ -52,7 +53,7 @@ En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret 
 \begin{figure}[h]
   %24
   \centering
-  \includegraphics[width=0.5\textwidth]{image24}
+  \includegraphics[width=0.3\textwidth]{image24}
   \caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
   \label{fig:2131}
 \end{figure}
@@ -60,7 +61,7 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste den okända vari
 \begin{figure}[h]
   %25
   \centering
-  \includegraphics[width=0.5\textwidth]{image25}
+  \includegraphics[width=0.3\textwidth]{image25}
   \caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\).}
   \label{fig:2132}
 \end{figure}
@@ -76,5 +77,28 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vil
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
 \end{figure}
-Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Detta gäller dock endast för noder med numeriska värden. Hur enhetsnoder (se \ref{subsubsec:noder} för förklaring av enhetsnod) hanteras är dock olika för varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.
+Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Detta gäller dock endast för noder med numeriska värden. Hur enhetsnoder (se \ref{subsubsec:noder} för förklaring av enhetsnod) hanteras är dock olika för varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
+Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
+\begin{figure}[h]
+  %16
+  \centering
+  \includegraphics[width=0.5\textwidth]{image16}
+  \caption{(a, b, c, d, e) efter första steget av förenkling av homogen nod}
+  \label{fig:2312}
+\end{figure}
+\begin{figure}[h]
+%  \begin{subfigure}[h]
+%    \includegraphics[width=0.3\textwidth]{image23}
+%  \end{subfigure}
+%  \begin{subfigure}[h]
+%    \includegraphics[width=0.3\textwidth]{image26}
+%  \end{subfigure}
+%  \begin{subfigure}[h]
+%    \includegraphics[width=0.3\textwidth]{image19}
+%  \end{subfigure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{image-merged}
+  \caption{\((a \times b \times c \times 3 \times 5) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
+  \label{fig:2313}
+\end{figure}
 \end{document}
