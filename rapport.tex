@@ -126,7 +126,7 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
 \\
 \subsection{Inhomogena noder}
 \label{subsec:inhomogena_noder}
-Inhomogena noder genomför inhomogena operationer; dvs. operationer som där ordningen av subnoderna spelar roll. (e.x. \(a - b \neq b - a\)). Därmed kan inhomogena noder ej kombineras rekursivt på samma sätt som homogena noder kan. (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) Detta medger också att det inte finns ett allmänt sätt att förenkla inhomogena noder.
+Inhomogena noder genomför inhomogena operationer; dvs. operationer som där ordningen av subnoderna spelar roll. (e.x. \(a - b \neq b - a\)). Därmed kan inhomogena noder ej kombineras rekursivt på samma sätt som homogena noder kan. \footnote{Se \ref{subsubsec:förenkling_homogena}} Allmän förenkling av homogena noder) Detta medger också att det inte finns ett allmänt sätt att förenkla inhomogena noder.
 \subsubsection{Potensnod}
 \label{subsubsec:potensnod}
 Potensnoder innehåller två barnnoder, basen och exponenten. En potensnod med en additionsnod i basen, exempelvis \((a+b+c)^{3}\). En potensnod med potens 0 kommer bytas ut mot en heltalsnod med värdet 0, en potensnod med värdet 1 kommer bytas ut mod basen. Potensnoder expanderas med hjälp av multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
@@ -170,7 +170,7 @@ När en ekvation löses förenklas den först så högerled är lika med 0. Sen 
 \section{Metod}
 \subsection{Klasser och Objekt}
 \label{subsection:klasserochobjekt}
-En viktig del av struktureringen av noder (se \ref{subsubsec:noder}, Noder) handlar om att en nod kan vara en utökad typ av en annan nod. Det vill säga, istället för att på nytt skapa varenda nod kan man istället skapa en generell nod för t.ex. operatörer, och sedan utöka den för varje sorts operation. Detta kallas för Objektorienterad Programmering (Object Oriented Programming, OOP). 
+En viktig del av struktureringen av noder \footnote {se \ref{subsubsec:noder}, Noder} handlar om att en nod kan vara en utökad typ av en annan nod. Det vill säga, istället för att på nytt skapa varenda nod kan man istället skapa en generell nod för t.ex. operatörer, och sedan utöka den för varje sorts operation. Detta kallas för Objektorienterad Programmering (Object Oriented Programming, OOP). 
 \subsubsection{Objektorienterad programmering}
 I princip funkar Objektorienterad programmering genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för attributer och handlingar. (Kan liknas t.ex. en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel som är enkelt att förstå är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
 \subsubsection{Subklasser och arv}
@@ -317,7 +317,7 @@ Algoritmen för potensnoden krävde att vi skulle känna till multinomialsatsen;
 \subsection{Källkritik}
 Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen funkar en algoritm eller inte, det går inte att vinkla en algoritm. 
 \subsubsection{KTH}
-Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Dimitrij har sen dess grundat företaget \textit{Mathleaks}, som är en app till för att hjälpa elever förstå och lösa matematiska problem. Eftersom Mathleaks är väldigt framgångsrikt anser vi att Dimitrijs examensarbete är en pålitlig källa.
+Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Examensarbetet kontrollerades av handledare och därför kan vi vara säkra på att källan är pålitlig. Dessutom är KTH ett väldigt välrespekterat universitet.
 \subsubsection{Encyclopædia Britannica}
 Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken som finns. Informationen är skriven av experter och verifierad, det gör det till en bra källa. 
 \subsubsection{Proofwiki}
