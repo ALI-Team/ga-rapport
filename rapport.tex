@@ -83,7 +83,7 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
   %16
   \centering
   \includegraphics[width=0.5\textwidth]{image16}
-  \caption{(a, b, c, d, e) efter första steget av förenkling av homogen nod}
+  \caption{\((a + b + c + d + e)\) efter första steget av förenkling av homogen nod}
   \label{fig:2312}
 \end{figure}
 \begin{figure}[h]
@@ -98,7 +98,15 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
 %  \end{subfigure}
   \centering
   \includegraphics[width=0.9\textwidth]{image-merged}
-  \caption{\((a \times b \times c \times 3 \times 5) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
+  \caption{\((a \times b \times c \times 3 \times 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
   \label{fig:2313}
 \end{figure}
+\subsubsection{Additionsnod}
+Förenklingen av en additionsnod funkar genom att fylla på en tom lista med värden från en additionsnods barnnoder och kollar om en nod i barnnodslistan kan läggas ihop med en nod i den nya listan. T.ex. om en additionsnod består av bara siffernoder så kommer dessa adderas. Om flera enhetsnoder med samma enhet förekommer så kommer deras koefficienter summeras (se Figur \ref{fig:2321}). En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{imaged-merged2}
+  \caption{\(5x + 3x + 10 + 2\) förenklas till \(8x + 12\)}
+  \label{fig:2321}
+ \end{figure}
 \end{document}
