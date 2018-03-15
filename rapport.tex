@@ -172,7 +172,7 @@ I princip funkar Objektorienterad programmering genom att man för varje förem�
 \subsubsection{Subklasser och arv}
 Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet (se \ref{subsection:klasserochobjekt} Klasser och Objekt) kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
 \subsubsection{Noder}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för metoder som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass. Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder (se \ref{subsec:homogena}
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för metoder som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder (se \ref{subsec:homogena}
 Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se \ref{subsec:inhomogena_noder} Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
 \begin{figure}[h!]
   \center
@@ -194,6 +194,7 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vil
     \texttt{eq} & Jämför noder (samma struktur, variabler etc.) \\
     \texttt{formatted} & Returnerar en text representation av noden.
   \end{tabular}
+  \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
 \end{figure}
 
 \end{document}
