@@ -39,7 +39,7 @@
 \newpage
 \selectlanguage{english}
 \begin{abstract}
-The purpose of this project is to look at some of the techniques used by sites such as WolframAlpha to simplify algebraic expressions and solve particular kinds of equations. To research this we wrote an application in Python with some of the features of such sites.  We chose to work with Python because of how quickly code can be written in Python and due to the fact everybody in the group knew Python before the project even started. During the span of this project we were able to develop an application which is able to take input and construct an abstract syntax tree which is then simplified. The application is able to handle many of our goals set in the beginning, including addition and multiplication of polynomials correctly, although not always fully simplified. The application is also able to solve polynomials up to the second degree. With time the application could easily be expanded to cover more aspects of what we set out to do such as polynomial division and solving polynomial equations of higher grades.
+The purpose of this project is to look at some of the techniques used by sites such as WolframAlpha to simplify algebraic expressions and solve particular kinds of equations. To research this we wrote an application in Python with some of the features of such sites.  We chose to work with Python due to its simplicity and due to the fact that everybody in the group knew it before the project even started. During the span of this project we were able to develop an application which is able to take input and construct an abstract syntax tree which is then simplified. The application is able to handle many of the goals that were set in the beginning of this project, including addition and multiplication of polynomials correctly, although not always fully simplified. The application is also able to solve polynomial equations up to and including the second degree. With time the application could easily be expanded to cover more aspects of what we set out to do such as polynomial division and solving polynomial equations of higher grades.
 \end{abstract}
 \textbf{Keywords:} Abstract syntax tree; Python; Algebraic Expressions
 \selectlanguage{swedish}
@@ -47,17 +47,17 @@ The purpose of this project is to look at some of the techniques used by sites s
 \tableofcontents
 \newpage
 \section{Inledning}
-Eftersom vi alla i gruppen delar en stor passion för programmering ville vi göra något som kombinerar programmering med ett naturvetenskapligt ämne. Vi övervägde flera olika projekt, bland annat en realtids fysikmotor, implementationer av matematiska funktioner (såsom sinus, exponenter) på hårdvarunära nivå samt idén som valdes: en symbolhanterare. En symbolhanterare, eller CAS, Computer Algebra System, är ett datorprogram som kan mata in, tolka, och lösa ekvationer, exempelvis \(5x + 10 = 20\). En annan funktion som en symbolhanterare antar är förmågan att förenkla uttryck, exempelvis \((x + 2)(x - 3) \Leftrightarrow (x^{2} - x - 6)\). Skillnaden mellan en vanlig miniräknare och en symbolhanterare är att symbolhanterare förstår algebra och kan samt kan hantera variabler, inte bara värden.
+Eftersom vi alla i gruppen delar en stor passion för programmering ville vi göra något som kombinerar programmering med ett naturvetenskapligt ämne. Vi övervägde flera olika idéer, bland annat en realtids fysikmotor, implementationer av matematiska funktioner (såsom sinus, exponenter) på hårdvarunära nivå samt idén som valdes: en symbolhanterare. En symbolhanterare, eller CAS, Computer Algebra System, är ett datorprogram som kan tolka och lösa ekvationer, exempelvis \(5x + 10 = 20\). En annan funktion som en symbolhanterare antar är förmågan att förenkla uttryck, exempelvis \((x + 2)(x - 3) \Leftrightarrow (x^{2} - x - 6)\). Skillnaden mellan en vanlig miniräknare och en symbolhanterare är att symbolhanterare förstår algebra samt samt att en symbolhanterare kan hantera variabler, inte bara värden.
 \section{Teori}
 \subsection{Abstrakt syntaxträd}
 Det är besvärligt för ett program att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)). Därför är det viktigt att ekvationen först byggs upp på ett sätt som är mer hanterbart för ett datorprogram. Så kallade abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsubsection{Allmänt om träd}
 Inom datavetenskap beskrivs träd som en form av datastruktur för att representera hierarkisk data. Ett träd inom matematiken består av noder som är sammansatta på så vis att varje nod kan innefatta ett eller flera barn, som i sig också är noder. I det här dokumentet kallas barnen för barnnoder eller subnoder. Noder behöver dock ej innefatta några barn, och då kallas dessa noder för löv. Dock behöver varje nod anta ett värde. Detta kan vara t.ex. ett numeriskt värde (e.x. \(5\) eller \(10\)), eller en operation (e.x. addition, multiplikation). Om en nod ej är ett barn till en annan nod betyder det att denna nod är högst upp i trädet. Denna typ av nod kallas för rotnod eller bara rot.
 \subsubsection{Implementation av syntaxträd}
-Trädet i sig utgår från en rotnod (eng. rootnode). I vårt fall är denna nod alltid ett likhetstecken (\(=\)), eftersom det är där ekvationen utgår ifrån. Precis som t.ex. en operatörsnod kan rotnoden anta två subnoder (I detta fall måste två noder antas, en för VL och en för HL). Därefter kan leden byggas upp av olika sorters noder.
+Trädet i sig utgår från en rotnod (eng. rootnode). Om trädet representerar en ekvation är denna nod alltid ett likhetstecken (\(=\)), eftersom det är där ekvationen utgår ifrån. Annars kan rotnoden vara precis vilken slags nod som helst. Precis som t.ex. en inhomogen\footnote{Se \ref{subsec:inhomogena_noder} Inhomogena noder} operatörsnod kan rotnoden anta två subnoder (I detta fall måste två noder antas, en för VL och en för HL). Därefter kan leden byggas upp av olika sorters noder.
 \subsubsection{Noder}
 \label{subsubsec:noder}
-En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)), funktion (e.x. \(log\), \(sin\)) eller operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Om noden är sådan att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde (\(+\) har ej ett värde utan två siffror på vardera sida av sig.) så kan noden själv anta noder (s.k. barnnoder, eng. childnodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
+En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)), funktion (e.x. \(log\), \(sin\)) eller operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Om noden är av sådan typ att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde, kan noden själv anta noder (s.k. barnnoder, eng. child nodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
 \begin{figure}[h]
   %24
   \centering
@@ -65,7 +65,7 @@ En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret 
   \caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
   \label{fig:2131}
 \end{figure}
-Eftersom programmet ska kunna hantera ekvationslösning, måste den okända variabeln kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\) den okända variabeln). För att representera variabeln används en speciell typ av nod; så kallad enhetsnod. Denna nod antar ett värde (för koefficienten) och en representation av den okända variabeln; en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
+Eftersom programmet ska kunna hantera ekvationslösning, måste den okända variabeln kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\) den okända variabeln.) För att representera variabeln används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde (för koefficienten) och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
 \begin{figure}[h]
   %25
   \centering
@@ -77,7 +77,7 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste den okända vari
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsection{Homogena noder}
 \label{subsec:homogena}
-Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se \ref{subsec:inhomogena_noder} Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
+Homogena noder är de noder där ordningen av subnoder ej spelar någon roll, vilket gör att subnoderna kan lagras som en lista som ej är begränsade i kapacitet. Dock byggs homogena noder först upp av ett träd av noder med bara två subnoder\footnote{Se \ref{subsec:inhomogena_noder} Inhomogena noder} eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
 \subsubsection{Allmän förenkling av homogena noder}
 \label{subsubsec:förenkling_homogena}
 \begin{figure}[h!]
@@ -87,8 +87,8 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vil
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
 \end{figure}
-Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Detta gäller dock endast för noder med numeriska värden. Hur enhetsnoder (se \ref{subsubsec:noder} för förklaring av enhetsnod) hanteras är dock olika för varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
-Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
+Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Enhetsnoder\footnote{Se \ref{subsubsec:noder} för förklaring av enhetsnod} hanteras dock olika av varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
+Additionen av två enhetsnoder med samma enhet kan förenklas genom att addera koefficienterna.
 \begin{figure}[h!]
   %16
   \centering
@@ -96,7 +96,7 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
   \caption{\((a + b + c + d + e)\) efter första steget av förenkling av homogen nod}
   \label{fig:2312}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[h!]
 %  \begin{subfigure}[h]
 %    \includegraphics[width=0.3\textwidth]{image23}
 %  \end{subfigure}
@@ -112,7 +112,7 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
   \label{fig:2313}
 \end{figure}
 \subsubsection{Additionsnod}
-Förenklingen av en additionsnod funkar genom att fylla på en tom lista med värden från en additionsnods barnnoder och kollar om en nod i barnnodslistan kan läggas ihop med en nod i den nya listan. T.ex. om en additionsnod består av bara siffernoder så kommer dessa adderas. Om flera enhetsnoder med samma enhet förekommer så kommer deras koefficienter summeras (se Figur \ref{fig:2321}). En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
+Förenklingen av en additionsnod fungerar genom att alla värden som kan summeras, summeras. Oftast innebär detta alla noder med numeriska värden. Enhetsnoder summeras om möjligt (ex. \(5x + 3x = 8x\)), se Figur \ref{fig:2321}, och behålls som subnoder för additionsnoden.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{image-merged2}
@@ -120,7 +120,8 @@ Förenklingen av en additionsnod funkar genom att fylla på en tom lista med vä
   \label{fig:2321}
 \end{figure}
 \subsubsection{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de originala enhetsnodernas koeficienter och vilken grad den nya enhetsnoden representeras i bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens värde (Se \ref{subsubsec:noder} Noder).
+Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de ursprungliga enhetsnodernas koefficienter och vilken grad den nya enhetsnoden representeras av bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens koefficient\footnote{Se \ref{subsubsec:noder} Noder}.\par
+En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
 \begin{figure}[h!]
   %26
   %32
@@ -143,15 +144,15 @@ Subtraktionsnoden är ej en homogen nod då ordningen på ekvationen spelar roll
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{image-merged3.png}
-  \caption{\(a-b\) före och efter förenkling. Minus noden transformeras till en additionsnod med b ersatt med \(b*-1\)}
+  \caption{\(a-b\) före och efter förenkling. Minus noden transformeras till en additionsnod med b ersatt med \(b \cdot -1\)}
 \end{figure}
 \subsubsection{Divisionsnod}
 \label{subsubsec:divnode}
-På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1)*b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(a/b\Rightarrow a*(b^{-1})\)
+På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(a/b\Rightarrow a \cdot (b^{-1})\)
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{image-merged4.png}
-  \caption{\(a/b\) förenklas till \(a*(b^{-1})\)}
+  \caption{\(a/b\) förenklas till \(a \cdot (b^{-1})\)}
 \end{figure}
 \subsubsection{Ekvationsnod}
 En ekvationsnod antar en nod för varje led (I vårt projekt kan en ekvationsnod endast anta två subnoder; en för VL och en för HL.) Målet med ekvationsnoden är att representera en ekvation som kan lösas ut och förenklas. Detta innebär att subtrahera ett led från båda leden, som på så sätt lämnar ett led tomt.
@@ -282,7 +283,7 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
     \(ax+b=0\) & Ja \\
     \(\frac{x}{a}=b\) & Ja \\
     \(ax^2+bx+c=0\) & Ja \\
-    \(\frac{a*x^2}{b}+\frac{x*c}{d}+\frac{e}/\frac{f}=g\) & Ja \\
+    \(\frac{a \cdot x^2}{b}+\frac{x \cdot c}{d}+\frac{e}/\frac{f}=g\) & Ja \\
     \((x+a)(x+b)=c\) & Ja \\
     \(\frac{(x+a)\cdot(x+b)}{c}+d=e\) & Ja \\
     \(x^a+b=c\) & Endast om \( a>0 \) \\
@@ -314,7 +315,7 @@ Just nu kan biblioteket endast lösa ekvationer som är skrivna på polynomform,
 \par
 Även om fokuset på projektet ej låg på hastigheten (se \ref{subsec:Komplexitet}) betyder det inte att det inte finns fördelar med att göra projektet snabbare, mer effektivt. Användningsområdet av biblioteket skulle utökas drastiskt, då det skulle kunna användas i applikationer som kräver förenkling av t.ex. polynom av någon hundratals grad.
 \par
-Biblioteket har också problem med att utföra konjugatregeln. För det mesta gör biblioteket rätt men det har problem med att förenkla \( a \cdot b + ((-1) \cdot ab\)
+Biblioteket har också problem med att utföra konjugatregeln. För det mesta gör biblioteket rätt men det har problem med att förenkla \( ab + (-1) \cdot ab\)
 \subsection{Lärdomar}
 Vi har lärt oss essenserna av syntaxträd och hur man kan strukturera de, inklusive hur man kan specialisera olika noder så att de har olika funktioner. (Se \ref{subsubsec:noder}) Vi lärde oss också hur man med hjälp av programmeringsspråkets implementation av klasser och arv kan implementera det i ett bibliotek.
 \par
