@@ -204,4 +204,23 @@ För att läsa in uttryck på normal form och för att enkelt omvandla de till a
 En lexer separerar den inmatade datan till s.k. tokens baserat på fördefinierade mönster och bygger upp en array (lista) baserad på dessa tokens. Med andra ord letar en lexer efter ett sorts mönster i indatan och fyller på array-en med motsvarande tokens. Tokens känns igen med hjälp av mönstermatchningsspråket regex. Nedan visas en tabell över vilka mönster som letas efter och vad de ersätts med i listan i den lexikaliska analysen. 
 Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd \(x\)], [addition], [värde, 10], [likhetstecken], [värde, 20])
 
+\begin{figure}[h!]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Mönster} & \textbf{Tokens} \\
+    \hline
+    Nummer & Nummernod \\
+    Bokstav & enhetsnod med värdet 1 \\
+    Nummer och bokstav & Enhetsnod med värdet nummer \\
+    \(+\) & Additionsnod \\
+    \(-\) & Subtraktionsnod \\
+    \(\cdot\) & Multiplikationsnod \\
+    \(\div\) & Divisionsnod \\
+    \string^ & Potensnod \\
+    \(=\) & Ekvation
+  \end{tabular}
+  \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
+  \label{tab:lexer_patterns}
+\end{figure}
+
 \end{document}
