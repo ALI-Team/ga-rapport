@@ -68,7 +68,7 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste den okända vari
 \subsection{Allmänt om förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsection{Homogena noder}
-Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se 2.4 Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
+Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se \ref{subsec:inhomogena_noder} Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
 \subsubsection{Allmän förenkling av homogena noder}
 \label{subsubsec:förenkling_homogena}
 \begin{figure}[h]
@@ -104,7 +104,7 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
 \end{figure}
 \subsubsection{Additionsnod}
 Förenklingen av en additionsnod funkar genom att fylla på en tom lista med värden från en additionsnods barnnoder och kollar om en nod i barnnodslistan kan läggas ihop med en nod i den nya listan. T.ex. om en additionsnod består av bara siffernoder så kommer dessa adderas. Om flera enhetsnoder med samma enhet förekommer så kommer deras koefficienter summeras (se Figur \ref{fig:2321}). En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.7\textwidth]{image-merged2}
   \caption{\(5x + 3x + 10 + 2\) förenklas till \(8x + 12\)}
@@ -112,4 +112,20 @@ Förenklingen av en additionsnod funkar genom att fylla på en tom lista med vä
 \end{figure}
 \subsubsection{Multiplikationsnod}
 Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de originala enhetsnodernas koeficienter och vilken grad den nya enhetsnoden representeras i bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \times 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens värde (Se \ref{subsubsec:noder} Noder).
+\begin{figure}
+  %26
+  %32
+  \centering
+  \includegraphics[width=0.4\textwidth]{image26}
+  \includegraphics[width=0.8\textwidth]{image32}
+  \caption{\((a + b) * (c + b)\) förenklas till \((a * b) + (b * c) + (b ^ 2) + (a * c)\)}
+\end{figure}
+\subsection{Inhomogena noder}
+\label{subsec:inhomogena_noder}
+Inhomogena noder genomför inhomogena operationer; dvs. operationer som där ordningen av subnoderna spelar roll. (e.x. \(a - b \neq b - a\)). Därmed kan inhomogena noder ej kombineras rekursivt på samma sätt som homogena noder kan. (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) Detta medger också att det inte finns ett allmänt sätt att förenkla inhomogena noder.
+\subsubsection{Potensnod}
+Potensnoder innehåller två barnnoder, basen och exponenten. En potensnod med en additionsnod i basen, exempelvis \((a+b+c)^{3}\), expanderas med hjälp av multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
+\[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
+Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
+\[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
 \end{document}
