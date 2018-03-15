@@ -97,15 +97,6 @@ Additionen av två enhetsnoder med samma enhet kan förenklas genom att addera k
   \label{fig:2312}
 \end{figure}
 \begin{figure}[h!]
-%  \begin{subfigure}[h]
-%    \includegraphics[width=0.3\textwidth]{image23}
-%  \end{subfigure}
-%  \begin{subfigure}[h]
-%    \includegraphics[width=0.3\textwidth]{image26}
-%  \end{subfigure}
-%  \begin{subfigure}[h]
-%    \includegraphics[width=0.3\textwidth]{image19}
-%  \end{subfigure}
   \centering
   \includegraphics[width=0.9\textwidth]{image-merged}
   \caption{\((a \cdot b \cdot c \cdot 3 \cdot 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
@@ -130,6 +121,9 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
   \includegraphics[width=0.8\textwidth]{image32}
   \caption{\((a + b) \cdot (c + b)\) förenklas till \((a \cdot b) + (b \cdot c) + (b ^ 2) + (a \cdot c)\)}
 \end{figure}
+\\
+\\
+\\
 \subsection{Inhomogena noder}
 \label{subsec:inhomogena_noder}
 Inhomogena noder genomför inhomogena operationer; dvs. operationer som där ordningen av subnoderna spelar roll. (e.x. \(a - b \neq b - a\)). Därmed kan inhomogena noder ej kombineras rekursivt på samma sätt som homogena noder kan. (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) Detta medger också att det inte finns ett allmänt sätt att förenkla inhomogena noder.
@@ -140,7 +134,7 @@ Potensnoder innehåller två barnnoder, basen och exponenten. En potensnod med e
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
 \subsubsection{Subtraktionsnod}
-Subtraktionsnoden är ej en homogen nod då ordningen på ekvationen spelar roll \(a-b\neq b-a\) och därmed måste subtraktionsnoden anta endast två noder; en för vänster sida och en för höger sida. För att simplifiera subtraktions noden så implementeras inget nytt. Den använder sig istället av additions noden och multiplikations noden för att uppnå en minus operation. Istället för att direkt räkna ut \(a-b\) så skrivs ekvationen om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
+Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a\), därmed måste subtraktionsnoden anta endast två barnnoder; en för vänster sida och en för höger sida. För att förenkla subtraktionsnoden implementeras inget nytt. Den använder sig istället av additions noden och multiplikations noden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs ekvationen om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{image-merged3.png}
@@ -148,7 +142,7 @@ Subtraktionsnoden är ej en homogen nod då ordningen på ekvationen spelar roll
 \end{figure}
 \subsubsection{Divisionsnod}
 \label{subsubsec:divnode}
-På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(a/b\Rightarrow a \cdot (b^{-1})\)
+På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(\frac{a}{b}\Rightarrow a \cdot (b^{-1})\)
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{image-merged4.png}
@@ -164,7 +158,7 @@ En ekvationsnod antar en nod för varje led (I vårt projekt kan en ekvationsnod
 \subsection{Ekvationslösning}
 Att lösa ekvationer med en okänd (dvs. lösa ut x) innebär att först förenkla ekvationen så att en sida antar värdet 0. Därefter kommer olika regler appliceras på ekvationen beroende på vilken grad den är i. Vilken grad den är i bestäms av den högsta potensen.
 
-När en ekvation löses så förenklas den först så högerled är lika med 0. Sen går den igenom alla direkta subnoder nod för nod och kolla efter okända och potens. GAMLP kan bara lösa ekvationer med en okänd. Den högsta exponenten på den okända är graden på ekvationen. Programmet har en samling av olika metoder för att lösa ekvationer och hittar den lämpligaste metoden och utför den. Vilka metoder som används beskrivs i \ref{subsubsec:Ekvationsmetoder}.
+När en ekvation löses förenklas den först så högerled är lika med 0. Sen går den igenom alla direkta subnoder nod för nod och kolla efter okända och potens. Programmet kan bara lösa ekvationer med en okänd. Den högsta exponenten på den okända är graden på ekvationen. Programmet har en samling av olika metoder för att lösa ekvationer och hittar den lämpligaste metoden och utför den. Vilka metoder som används beskrivs i \ref{subsubsec:Ekvationsmetoder}.
 \subsubsection{Ekvationsmetoder}
 \label{subsubsec:Ekvationsmetoder}
 \paragraph{Förstagradsekvationer}
@@ -180,10 +174,9 @@ En viktig del av struktureringen av noder (se \ref{subsubsec:noder}, Noder) hand
 \subsubsection{Objektorienterad programmering}
 I princip funkar Objektorienterad programmering genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för attributer och handlingar. (Kan liknas t.ex. en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel som är enkelt att förstå är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
 \subsubsection{Subklasser och arv}
-Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet (se \ref{subsection:klasserochobjekt} Klasser och Objekt) kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
+Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet\footnote{se \ref{subsection:klasserochobjekt} Klasser och Objekt} kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
 \subsubsection{Noder}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för metoder som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder (se \ref{subsec:homogena}
-Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se \ref{subsec:inhomogena_noder} Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för metoder som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder\footnote{Se \ref{subsec:homogena} Homogena noder}.
 \begin{figure}[h!]
   \center
   \includegraphics[width=1\textwidth]{image20}
@@ -235,14 +228,14 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [vä
 \end{figure}
 
 \subsubsection{Parser}
-Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen (se \ref{subsubsec:lexikaliskanal} Lexikalisk analys). Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras. 
+Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen\footnote{Se \ref{subsubsec:lexikaliskanal} Lexikalisk analys}. Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras. 
 
 \subsection{Bilder på träd}
-Bilderna på träden som används relativt ofta i denna rapport är också del av GAMLP, som har möjligheten att generera bilder av träd. Dessa genereras med hjälp av biblioteket graphviz. För varje träd går programmet igenom trädet uppifrån och ner och skapar listor med alla noder och kanter. Programmet beskriver sedan kod med dotsyntax, som sedan tolkas med programmet dot för att generera en bild på trädet.
+Bilderna på träden som används relativt ofta i denna rapport är också del av GAMLP, som har möjligheten att generera bilder av träd. Dessa genereras med hjälp av biblioteket \textit{graphviz}. För varje träd går programmet igenom trädet uppifrån och ner och skapar listor med alla noder och kanter. Programmet beskriver sedan kod med dotsyntax, som sedan tolkas med programmet dot för att generera en bild på trädet.
 
 \subsection{Källor}
 \subsubsection{Struktur}
-Strukturen av projektet baserades till viss del på ett examensarbete vid namn Constructing a Computer Algebra System Capable of Generating Pedagogical Step-by-Step Solutions skriven av Dimitrij Lioubartsev (KTH, 2016). Syftet med detta examensarbete är att modifiera ett existerande bibliotek för symbolhantering, SymPy, så att det kan generera stegen som krävs för att kunna lösa en ekvation. Detta var givetvis ej syftet med vårt gymnasiearbete, men examensarbetet gick in i detalj hur en symbolhanterare kan fungera (kapitel 3). Denna text användes för källa då den kändes relevant till vårt arbete. Så som vi kunde använda den för inspiration för hur arbetet skulle läggas upp användes den också som exempel på hur själva rapporten kunde se ut.
+Strukturen av projektet baserades till viss del på ett examensarbete vid namn \textit{Constructing a Computer Algebra System Capable of Generating Pedagogical Step-by-Step Solutions} skriven av Dimitrij Lioubartsev (KTH, 2016). Syftet med detta examensarbete är att modifiera ett existerande bibliotek för symbolhantering, SymPy, så att det kan generera stegen som krävs för att kunna lösa en ekvation. Detta var givetvis ej syftet med vårt gymnasiearbete, men examensarbetet gick in i detalj hur en symbolhanterare kan fungera (kapitel 3). Denna text användes som källa då den kändes relevant till vårt arbete. Vi kunde använda källan för inspiration för hur arbetet skulle läggas samt som exempel på hur själva rapporten kunde se ut.
 
 \subsubsection{Multinomial}
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
@@ -250,7 +243,7 @@ Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med mult
 \section{Resultat}
 \subsection{Vilka förmågor innefattar biblioteket}
 \subsubsection{Förenkling}
-Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynom form, vilket kan vara fördelaktigt i vissa situationer, dock inte alla.
+Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynomform, vilket kan vara fördelaktigt i vissa situationer, dock inte alla.
 \begin{savenotes}
 \begin{figure}[h!]
   \centering
@@ -295,27 +288,27 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
 
 \subsection{Arbetsprocess}
 \subsubsection{Python}
-Vi valde att skriva biblioteket i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
+Vi valde att skriva programmet i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
 
 \subsubsection{Github}
-Biblioteket sparades på GitHub, som är en service för versionshanteringsprogrammet git. GitHub underlättar programmeringsprocessen för projekt som innefattar flera deltagare. GitHub har också inbyggda funktioner för t.ex. problemhantering, då s.k. issues kan öppnas för att flagga upp utvecklarna att man har funnit ett eller flera problem i koden.
+Programmet sparades på GitHub, som är en service för versionshanteringsprogrammet git. GitHub underlättar programmeringsprocessen för projekt som innefattar flera deltagare. GitHub har också inbyggda funktioner för t.ex. problemhantering, då s.k. issues kan öppnas för att flagga upp utvecklarna att man har funnit ett eller flera problem i koden.
 
 \section{Diskussion}
 \subsection{Komplexitet}
 \label{subsec:Komplexitet}
-En kods komplexitet definieras som gränsvärdet av tiden det tar för programmet att utföra sin uppgift när storleken på indatan går mot oändligheten. Att komplexiteten är ett gränsvärde har fördelen att den endast blir beroende av det största värdet, dvs. indatan. Till exempel: om det tar linjär tid att ta indata och kvadratisk tid att behandla indatan blir komplexiteten kvadratisk tid då den linjära termen inte spelar någon roll när storleken på indatan blir hög/stor. Detta skrivs som \(O(n^2)\). Med O menas juste gränsvärdet när n går mot oändligheten.
+En kods komplexitet definieras som gränsvärdet av tiden det tar för programmet att utföra sin uppgift när storleken på indatan går mot oändligheten. Att komplexiteten är ett gränsvärde har fördelen att den endast blir beroende av det största värdet, dvs. indatan. Till exempel: om det tar linjär tid att ta indata och kvadratisk tid att behandla indatan blir komplexiteten kvadratisk tid då den linjära termen inte spelar någon roll när storleken på indatan blir hög/stor. Detta skrivs som \(O(n^2)\). Med \(O\) menas juste gränsvärdet när n går mot oändligheten.
 \par
-Även om projektet blev ett bibliotek och kan definitivt användas inuti andra program så fokuserade vi inte på att göra programmet så snabbt som möjligt. Det var viktigare för oss att få så många kärnfunktioner som möjligt att fungera bra så att biblioteket, m.h.a. ett program som är inkluderat i projektet, kan användas som en avancerad miniräknare. Då eftersom sannolikheten att programmet kommer behöva hantera stora mängder indata är hastigheten på programmet ej direkt relevant vid dessa situationer. 
+Även om projektet blev ett bibliotek som kan användas inuti andra program så fokuserade vi inte på att göra programmet så snabbt som möjligt. Det var viktigare för oss att få så många kärnfunktioner som möjligt att fungera bra så att biblioteket, m.h.a. ett program som är inkluderat i projektet, kan användas som en avancerad miniräknare. Eftersom sannolikheten att programmet kommer behöva hantera stora mängder indata är låg, är hastigheten på programmet inte direkt relevant vid dessa situationer. 
 \subsection{Kodstruktur}
-Kodstruktur är essentiellt för större projekt för att underlätta vidareutveckling. Därför delade vi upp delar av projektet i t.ex. klasser. Under arbetets gång hjälpte det oss att förstå varandras kod.
+Kodstruktur är essentiellt för större projekt för att underlätta vidareutveckling. Därför delade vi upp projektet exempelvis i klasser. Under arbetets gång hjälpte det oss att förstå varandras kod.
 \par
-Dock var strukturen inte perfekt. Klasserna delades upp i varsin fil, och eftersom klasserna ofta behöver ha tillgång till andra klasser och dess metoder behöver dessa då importeras. Detta ledde till att om två klasser behövde tillgång till varandra (vilket hände i vårt fall) så skulle de importera varandra. Inom programmering kallas detta för circular importing, och är allmänt dålig praxis, eftersom det ökar risken till att programmet helt enkelt inte funkar, eller att det t.ex. blir svårare att reorganisera projektet om det skulle behövas.
+Strukturen var dock inte perfekt. Klasserna delades upp i varsin fil, och eftersom klasserna ofta behöver ha tillgång till andra klasser och dess metoder behöver dessa då importeras. Detta ledde till att om två klasser behövde tillgång till varandra (vilket hände i vårt fall) så skulle de importera varandra. Inom programmering kallas detta för circular import, och är allmänt dålig praxis, eftersom det ökar risken till att programmet helt enkelt inte funkar, eller att det t.ex. blir svårare att reorganisera projektet om det skulle behövas.
 \subsection{Möjliga förbättringar}
 Just nu kan biblioteket endast lösa ekvationer som är skrivna på polynomform, och endast upp till den andra graden. Dessvärre hanteras division på ett sätt som gör att vissa ekvationer (framförallt de som inkluderar division med en okänd variabel) ej går att lösas. Tyvärr inkluderar detta också trivialfallet \( \frac{x}{x} = 1 \). På grund av detta kan bibliotek ej heller utföra polynomdivision.
 \par
 Även om fokuset på projektet ej låg på hastigheten (se \ref{subsec:Komplexitet}) betyder det inte att det inte finns fördelar med att göra projektet snabbare, mer effektivt. Användningsområdet av biblioteket skulle utökas drastiskt, då det skulle kunna användas i applikationer som kräver förenkling av t.ex. polynom av någon hundratals grad.
 \par
-Biblioteket har också problem med att utföra konjugatregeln. För det mesta gör biblioteket rätt men det har problem med att förenkla \( ab + (-1) \cdot ab\)
+Biblioteket har också problem med att utföra konjugatregeln. För det mesta gör biblioteket rätt men det har problem med att förenkla \( ab + (-1) \cdot ab\).
 \subsection{Lärdomar}
 Vi har lärt oss essenserna av syntaxträd och hur man kan strukturera de, inklusive hur man kan specialisera olika noder så att de har olika funktioner. (Se \ref{subsubsec:noder}) Vi lärde oss också hur man med hjälp av programmeringsspråkets implementation av klasser och arv kan implementera det i ett bibliotek.
 \par
