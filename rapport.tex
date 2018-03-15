@@ -70,6 +70,7 @@ Operatörsnoder vars subnoder endast består av numeriska värden räknas helt e
 \subsection{Homogena noder}
 Homogena noder är de noder där ordningen av subnoder ej spelar någon roll vilket gör att de kan lagras som en lista (array) och är inte limiterad i antal. Dock byggs homogena noder först upp av flera noder med bara två subnoder (Se 2.4 Inhomogena noder) eftersom det är så programmet tolkar inmatningen, se Figur \ref{fig:2311}.
 \subsubsection{Allmän förenkling av homogena noder}
+\label{subsubsec:förenkling_homogena}
 \begin{figure}[h]
   %22
   \centering
@@ -105,8 +106,10 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
 Förenklingen av en additionsnod funkar genom att fylla på en tom lista med värden från en additionsnods barnnoder och kollar om en nod i barnnodslistan kan läggas ihop med en nod i den nya listan. T.ex. om en additionsnod består av bara siffernoder så kommer dessa adderas. Om flera enhetsnoder med samma enhet förekommer så kommer deras koefficienter summeras (se Figur \ref{fig:2321}). En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{imaged-merged2}
+  \includegraphics[width=0.7\textwidth]{image-merged2}
   \caption{\(5x + 3x + 10 + 2\) förenklas till \(8x + 12\)}
   \label{fig:2321}
- \end{figure}
+\end{figure}
+\subsubsection{Multiplikationsnod}
+Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de originala enhetsnodernas koeficienter och vilken grad den nya enhetsnoden representeras i bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \times 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens värde (Se \ref{subsubsec:noder} Noder).
 \end{document}
