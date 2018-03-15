@@ -35,7 +35,7 @@
 \newpage
 \selectlanguage{english}
 \begin{abstract}
-The purpose of this project is to look at some of the techniques used by sites such as WolframAlpha to simplify algebraic expressions and solve particular kinds of equations. To research this we wrote an application in Python with some of the features of such sites.  We chose to work with Python because of how quickly code can be written in Python and due to the fact everybody in the group knew Python before the project even started. During the span of this project we were able to develop an application which is able to take input and construct an abstract syntax tree which is then simplified. The application is able to handle many of our goals set in the beginning, including addition and multiplication of polynomials correctly, although not always fully simplified. The application is also able to solve polynomials up to the second degree. With time the application could easily be expanded to cover more aspects of what we set out to do such as polynomial division and solving polynomial equations of higher grades.ga
+The purpose of this project is to look at some of the techniques used by sites such as WolframAlpha to simplify algebraic expressions and solve particular kinds of equations. To research this we wrote an application in Python with some of the features of such sites.  We chose to work with Python because of how quickly code can be written in Python and due to the fact everybody in the group knew Python before the project even started. During the span of this project we were able to develop an application which is able to take input and construct an abstract syntax tree which is then simplified. The application is able to handle many of our goals set in the beginning, including addition and multiplication of polynomials correctly, although not always fully simplified. The application is also able to solve polynomials up to the second degree. With time the application could easily be expanded to cover more aspects of what we set out to do such as polynomial division and solving polynomial equations of higher grades.
 \end{abstract}
 \textbf{Keywords:} Abstract syntax tree; Python; Algebraic Expressions
 \selectlanguage{swedish}
@@ -53,7 +53,7 @@ Inom datavetenskap beskrivs träd som en form av datastruktur för att represent
 Trädet i sig utgår från en rotnod (eng. rootnode). I vårt fall är denna nod alltid ett likhetstecken (\(=\)), eftersom det är där ekvationen utgår ifrån. Precis som t.ex. en operatörsnod kan rotnoden anta två subnoder (I detta fall måste två noder antas, en för VL och en för HL). Därefter kan leden byggas upp av olika sorters noder.
 \subsubsection{Noder}
 \label{subsubsec:noder}
-En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)), funktion (e.x. \(log\), \(sin\)) eller operator (e.x. \(+\), \(-\), \(\times\), \(\div\), \string^). Om noden är sådan att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde (\(+\) har ej ett värde utan två siffror på vardera sida av sig.) så kan noden själv anta noder (s.k. barnnoder, eng. childnodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
+En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)), funktion (e.x. \(log\), \(sin\)) eller operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Om noden är sådan att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde (\(+\) har ej ett värde utan två siffror på vardera sida av sig.) så kan noden själv anta noder (s.k. barnnoder, eng. childnodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
 \begin{figure}[h]
   %24
   \centering
@@ -104,7 +104,7 @@ Två enhetsnoder med samma enhet kan slås ihop genom att addera värderna.
 %  \end{subfigure}
   \centering
   \includegraphics[width=0.9\textwidth]{image-merged}
-  \caption{\((a \times b \times c \times 3 \times 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
+  \caption{\((a \cdot b \cdot c \cdot 3 \cdot 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
   \label{fig:2313}
 \end{figure}
 \subsubsection{Additionsnod}
@@ -116,14 +116,14 @@ Förenklingen av en additionsnod funkar genom att fylla på en tom lista med vä
   \label{fig:2321}
 \end{figure}
 \subsubsection{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de originala enhetsnodernas koeficienter och vilken grad den nya enhetsnoden representeras i bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \times 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens värde (Se \ref{subsubsec:noder} Noder).
+Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de originala enhetsnodernas koeficienter och vilken grad den nya enhetsnoden representeras i bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens värde (Se \ref{subsubsec:noder} Noder).
 \begin{figure}[h!]
   %26
   %32
   \centering
   \includegraphics[width=0.4\textwidth]{image26}
   \includegraphics[width=0.8\textwidth]{image32}
-  \caption{\((a + b) * (c + b)\) förenklas till \((a * b) + (b * c) + (b ^ 2) + (a * c)\)}
+  \caption{\((a + b) \cdot (c + b)\) förenklas till \((a \cdot b) + (b \cdot c) + (b ^ 2) + (a \cdot c)\)}
 \end{figure}
 \subsection{Inhomogena noder}
 \label{subsec:inhomogena_noder}
@@ -266,5 +266,65 @@ Programmet strävar efter att förenkla ekvationen så den blir omskriven på po
   \label{tab:expressions}
 \end{figure}
 \end{savenotes}
+
+\subsubsection{Ekvationslösning}
+Programmet kan lösa relativt avancerade ekvationer. Programmet är i första hand utvecklat för att lösa polynomekvationer.
+
+\begin{figure}[h!]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Allmänt uttryck} & \textbf{Löser programmet ekvationen?} \\
+    \hline
+    \(ax+b=0\) & Ja \\
+    \(\frac{x}{a}=b\) & Ja \\
+    \(ax^2+bx+c=0\) & Ja \\
+    \(\frac{a*x^2}{b}+\frac{x*c}{d}+\frac{e}/\frac{f}=g\) & Ja \\
+    \((x+a)(x+b)=c\) & Ja \\
+    \(\frac{(x+a)\cdot(x+b)}{c}+d=e\) & Ja \\
+    \(x^a+b=c\) & Endast om \( a>0 \) \\
+    \((x+a)\cdot(x+b)\cdot(x+c)=d\) & Nej 
+  \end{tabular}
+  \captionof{table}{Ekvationer och om de kan lösas}
+  \label{tab:lexer_patterns}
+\end{figure}
+
+\subsection{Arbetsprocess}
+\subsubsection{Python}
+Vi valde att skriva biblioteket i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
+
+\subsubsection{Github}
+Biblioteket sparades på GitHub, som är en service för versionshanteringsprogrammet git. GitHub underlättar programmeringsprocessen för projekt som innefattar flera deltagare. GitHub har också inbyggda funktioner för t.ex. problemhantering, då s.k. issues kan öppnas för att flagga upp utvecklarna att man har funnit ett eller flera problem i koden.
+
+\section{Diskussion}
+\subsection{Komplexitet}
+\label{subsec:Komplexitet}
+En kods komplexitet definieras som gränsvärdet av tiden det tar för programmet att utföra sin uppgift när storleken på indatan går mot oändligheten. Att komplexiteten är ett gränsvärde har fördelen att den endast blir beroende av det största värdet, dvs. indatan. Till exempel: om det tar linjär tid att ta indata och kvadratisk tid att behandla indatan blir komplexiteten kvadratisk tid då den linjära termen inte spelar någon roll när storleken på indatan blir hög/stor. Detta skrivs som \(O(n^2)\). Med O menas juste gränsvärdet när n går mot oändligheten.
+\par
+Även om projektet blev ett bibliotek och kan definitivt användas inuti andra program så fokuserade vi inte på att göra programmet så snabbt som möjligt. Det var viktigare för oss att få så många kärnfunktioner som möjligt att fungera bra så att biblioteket, m.h.a. ett program som är inkluderat i projektet, kan användas som en avancerad miniräknare. Då eftersom sannolikheten att programmet kommer behöva hantera stora mängder indata är hastigheten på programmet ej direkt relevant vid dessa situationer. 
+\subsection{Kodstruktur}
+Kodstruktur är essentiellt för större projekt för att underlätta vidareutveckling. Därför delade vi upp delar av projektet i t.ex. klasser. Under arbetets gång hjälpte det oss att förstå varandras kod.
+\par
+Dock var strukturen inte perfekt. Klasserna delades upp i varsin fil, och eftersom klasserna ofta behöver ha tillgång till andra klasser och dess metoder behöver dessa då importeras. Detta ledde till att om två klasser behövde tillgång till varandra (vilket hände i vårt fall) så skulle de importera varandra. Inom programmering kallas detta för circular importing, och är allmänt dålig praxis, eftersom det ökar risken till att programmet helt enkelt inte funkar, eller att det t.ex. blir svårare att reorganisera projektet om det skulle behövas.
+\subsection{Möjliga förbättringar}
+Just nu kan biblioteket endast lösa ekvationer som är skrivna på polynomform, och endast upp till den andra graden. Dessvärre hanteras division på ett sätt som gör att vissa ekvationer (framförallt de som inkluderar division med en okänd variabel) ej går att lösas. Tyvärr inkluderar detta också trivialfallet \( \frac{x}{x} = 1 \). På grund av detta kan bibliotek ej heller utföra polynomdivision.
+\par
+Även om fokuset på projektet ej låg på hastigheten (se \ref{subsec:Komplexitet}) betyder det inte att det inte finns fördelar med att göra projektet snabbare, mer effektivt. Användningsområdet av biblioteket skulle utökas drastiskt, då det skulle kunna användas i applikationer som kräver förenkling av t.ex. polynom av någon hundratals grad.
+\par
+Biblioteket har också problem med att utföra konjugatregeln. För det mesta gör biblioteket rätt men det har problem med att förenkla \( a \cdot b + ((-1) \cdot ab\)
+\subsection{Lärdomar}
+Vi har lärt oss essenserna av syntaxträd och hur man kan strukturera de, inklusive hur man kan specialisera olika noder så att de har olika funktioner. (Se \ref{subsubsec:noder}) Vi lärde oss också hur man med hjälp av programmeringsspråkets implementation av klasser och arv kan implementera det i ett bibliotek.
+\par
+Algoritmen för potensnoden krävde att vi skulle känna till multinomialsatsen; något som ingen av oss kände till innan projektet.
+
+\subsection{Källkritik}
+Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen funkar en algoritm eller inte, det går inte att vinkla en algoritm. 
+\subsubsection{KTH}
+Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Dimitrij har sen dess grundat företaget \textit{Mathleaks}, som är en app till för att hjälpa elever förstå och lösa matematiska problem. Eftersom Mathleaks är väldigt framgångsrikt anser vi att Dimitrijs examensarbete är en pålitlig källa.
+\subsubsection{Encyclopædia Britannica}
+Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken som finns. Informationen är skriven av experter och verifierad, det gör det till en bra källa. 
+\subsubsection{Proofwiki}
+Proofwiki är en wiki för matematiska bevis. För att skriva och ändra krävs godkännande, medlemskap söks inte skapas. Den är fortfarande overifierad med eftersom informationen överensstämmer med britannica.
+\subsubsection{Python.org}
+Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt trovärdig. Dessutom är även den här typen av information antingen fungerande eller inte. 
 
 \end{document}
