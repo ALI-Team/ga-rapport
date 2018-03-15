@@ -126,6 +126,7 @@ Efter de generella förenklingarna av homogena noder (Se \ref{subsubsec:förenkl
 \label{subsec:inhomogena_noder}
 Inhomogena noder genomför inhomogena operationer; dvs. operationer som där ordningen av subnoderna spelar roll. (e.x. \(a - b \neq b - a\)). Därmed kan inhomogena noder ej kombineras rekursivt på samma sätt som homogena noder kan. (Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder) Detta medger också att det inte finns ett allmänt sätt att förenkla inhomogena noder.
 \subsubsection{Potensnod}
+\label{subsubsec:potensnod}
 Potensnoder innehåller två barnnoder, basen och exponenten. En potensnod med en additionsnod i basen, exempelvis \((a+b+c)^{3}\), expanderas med hjälp av multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
@@ -236,5 +237,28 @@ Strukturen av projektet baserades till viss del på ett examensarbete vid namn C
 
 \subsubsection{Multinomial}
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
+
+\section{Resultat}
+\subsection{Vilka förmågor innefattar biblioteket}
+\subsubsection{Förenkling}
+Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynom form, vilket kan vara fördelaktigt i vissa situationer, dock inte alla.
+\begin{figure}[h!]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Uttryck} & \textbf{Förenklas till} \\
+    \hline
+    \(\frac{ac + bc}{c}\) & Kan ej förenklas \\
+    \(a+a\) & \(2a\) \\
+    \(a \cdot a\) & \(a^{2}\) \\
+    \(a - a\) & \(0\) \\
+    \((a+b)^{2}\) & \(a^{2} + 2ab + b^{2}\) \\
+    \(\frac{a}{a}\) & Kan ej förenklas \\
+    \((a+b+\ldots)^{k}\) & Se \ref{subsubsec:potensnod} \\
+    \(ak+am\) & \(a(k+m)\) \\
+    \(\frac{a+b}{c+d}\) & Programmer kraschar
+  \end{tabular}
+  \captionof{table}{Uttryck och vad de förenklas till (om möjligt)}
+  \label{tab:expressions}
+\end{figure}
 
 \end{document}
