@@ -6,8 +6,11 @@
 \usepackage{mathtools}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{footnote}
 
 \graphicspath{ {images/} }
+
+\makesavenoteenv{tabular}
 
 \author{
   Matstoms, Axel
@@ -139,6 +142,7 @@ Subtraktionsnoden är ej en homogen nod då ordningen på ekvationen spelar roll
   \caption{\(a-b\) före och efter förenkling. Minus noden transformeras till en additionsnod med b ersatt med \(b*-1\)}
 \end{figure}
 \subsubsection{Divisionsnod}
+\label{subsubsec:divnode}
 På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1)*b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(a/b\Rightarrow a*(b^{-1})\)
 \begin{figure}[h!]
   \centering
@@ -242,6 +246,7 @@ Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med mult
 \subsection{Vilka förmågor innefattar biblioteket}
 \subsubsection{Förenkling}
 Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynom form, vilket kan vara fördelaktigt i vissa situationer, dock inte alla.
+\begin{savenotes}
 \begin{figure}[h!]
   \centering
   \begin{tabular}{l|l}
@@ -252,7 +257,7 @@ Programmet strävar efter att förenkla ekvationen så den blir omskriven på po
     \(a \cdot a\) & \(a^{2}\) \\
     \(a - a\) & \(0\) \\
     \((a+b)^{2}\) & \(a^{2} + 2ab + b^{2}\) \\
-    \(\frac{a}{a}\) & Kan ej förenklas \\
+    \(\frac{a}{a}\) & Kan ej förenklas \footnote{Det triviala uttrycket \(\frac{a}{a}\) kan ej förenklas då biblioteket ej kan hantera \(a^{-1}\). Se \ref{subsubsec:divnode}} \\
     \((a+b+\ldots)^{k}\) & Se \ref{subsubsec:potensnod} \\
     \(ak+am\) & \(a(k+m)\) \\
     \(\frac{a+b}{c+d}\) & Programmer kraschar
@@ -260,5 +265,6 @@ Programmet strävar efter att förenkla ekvationen så den blir omskriven på po
   \captionof{table}{Uttryck och vad de förenklas till (om möjligt)}
   \label{tab:expressions}
 \end{figure}
+\end{savenotes}
 
 \end{document}
