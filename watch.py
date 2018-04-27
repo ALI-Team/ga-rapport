@@ -11,7 +11,10 @@ class Handler(FileSystemEventHandler):
             return
         print(event)
         print("REGEN")
-        os.system("pdflatex --halt-on-error rapport.tex")
+        regen()
+
+def regen():
+    os.system("pdflatex --halt-on-error rapport.tex")
 
 #event_handler = LoggingEventHandler()
 observer = Observer()
@@ -19,7 +22,9 @@ observer.schedule(Handler(), ".")
 observer.start()
 try:
     while True:
-        time.sleep(1)
+        cmd=input("cmd:")
+        if cmd=="r":
+            regen()
 except KeyboardInterrupt:
     observer.stop()
 observer.join()
