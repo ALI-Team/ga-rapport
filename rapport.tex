@@ -94,8 +94,7 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll, vi
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
 \end{figure}
-Att förenkla noder som precis har tolkats av programmet (se Figur \ref{fig:2311}) är dock opraktiskt. Därför är det första steget i förenklingen att försumma staplade homogena noder av samma typ till en enda nod. Om noderna antar numeriska värden räknas de ihop till en subnod, medans variabler (\(x\)) helt enkelt lämnas som en subnod. Efter det läggs elementen in i noden en efter en och varje element kontrolleras om den kan slås ihop med en annan subnod. Enhetsnoder\footnote{Se \ref{subsubsec:noder} för förklaring av enhetsnod} hanteras dock olika av varje typ av homogen nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
-Additionen av två enhetsnoder med samma enhet kan förenklas genom att addera koefficienterna.
+Första steget i förenklingen är att försumma staplade homogena noder av samma typ till en enda nod se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element slås ihop med varandra i sörsta möjliga utsträckning. Hur noder slås ihop hanteras olika av varje typ av nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
 \begin{figure}[h!]
   %16
   \centering
@@ -118,7 +117,11 @@ Förenklingen av en additionsnod fungerar genom att alla värden som kan summera
   \label{fig:2321}
 \end{figure}
 \subsubsection{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. Alla kombinationer av dessa separerade additionsnoders subnoder multipliceras med övriga noder och adderas ihop. Enhetsnoder kombineras genom att skapa en ny enhetsnod vars koefficient består av produkten av de ursprungliga enhetsnodernas koefficienter och vilken grad den nya enhetsnoden representeras av bestäms av hur många enhetsnoder det från början var. (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att de övriga värdena multipliceras in i enhetsnodens koefficient\footnote{Se \ref{subsubsec:noder} Noder}.\par
+Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. För att lösa ut additionsnoder skapas alla kombinationer av additionsnodernas subnoder. Dessa kombinationerna multipliceras ihop tillsammans med de övriga noder och adderas ihop.
+\[ \left( a+b \right) \cdot \left( c+d \right) \cdot fg \]
+\[ \Leftrightarrow \]
+\[ acfg + adfg + bcfg+bdfg \]
+Enhetsnoder med samma okänd kombineras genom att skapa en ny enhetsnod där enheten blir produkten av de enheterna för noderna och koefficienten produken av koefficienterna (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att multiplicera in i enhetsnodens koefficient\footnote{Se \ref{subsubsec:noder} Noder}.\par
 En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
 \begin{figure}[h!]
   %26
