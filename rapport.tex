@@ -47,7 +47,14 @@ The purpose of this project is to look at some of the techniques used by sites s
 \tableofcontents
 \newpage
 \section{Inledning}
-Eftersom vi alla i gruppen delar en stor passion för programmering ville vi göra något som kombinerar programmering med ett naturvetenskapligt ämne. Vi övervägde flera olika idéer, bland annat en realtids fysikmotor, implementationer av matematiska funktioner (såsom sinus, exponenter) på hårdvarunära nivå samt idén som valdes: en symbolhanterare. En symbolhanterare, eller CAS, Computer Algebra System, är ett datorprogram som kan tolka och lösa ekvationer, exempelvis \(5x + 10 = 20\). En annan funktion som en symbolhanterare antar är förmågan att förenkla uttryck, exempelvis \((x + 2)(x - 3) \Leftrightarrow (x^{2} - x - 6)\). Skillnaden mellan en vanlig miniräknare och en symbolhanterare är att symbolhanterare förstår algebra samt samt att en symbolhanterare kan hantera variabler, inte bara värden.
+Eftersom vi alla i gruppen delar en stor passion för programmering ville vi göra något som kombinerar programmering med ett naturvetenskapligt ämne. Vi övervägde flera olika idéer, bland annat en realtids fysikmotor, implementationer av matematiska funktioner (såsom sinus, exponenter) på hårdvarunära nivå samt idén som valdes: en symbolhanterare. En symbolhanterare, eller CAS, Computer Algebra System, är ett datorprogram som kan tolka och lösa ekvationer, exempelvis \(5x + 10 = 20\). En annan funktion som en symbolhanterare antar är förmågan att förenkla uttryck, exempelvis \((x + 2)(x - 3) \Leftrightarrow (x^{2} - x - 6)\). Skillnaden mellan en vanlig miniräknare och en symbolhanterare är att symbolhanterare förstår algebra samt samt att en symbolhanterare kan hantera variabler, inte bara värden.är
+\par
+Syftet med arbetet är att undersöka hur verktyg såsom WolframAlpha fungerar, dvs. hur inmatad data tolkas, hanteras och förenklas. Arbetet har utgått från dessa frågeställningar:
+\begin{itemize}
+	\item Hur inmatad data kan tolkas och representeras som en trädstruktur
+	\item Hur uttryck kan förenklas m.h.a. dessa trädstrukturer
+	\item Hur lösningar till ekvationer kan hittas
+\end{itemize}
 \section{Teori}
 \subsection{Abstrakt syntaxträd}
 Det är besvärligt för ett program att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)). Därför är det viktigt att ekvationen först byggs upp på ett sätt som är mer hanterbart för ett datorprogram. Så kallade abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
