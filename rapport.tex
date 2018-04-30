@@ -56,16 +56,19 @@ Syftet med arbetet är att undersöka hur verktyg såsom WolframAlpha fungerar, 
 	\item Hur lösningar till ekvationer kan hittas
 \end{itemize}
 \section{Teori}
-\subsection{Abstrakt syntaxträd}
-Det är besvärligt för ett program att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)). Därför är det viktigt att ekvationen först byggs upp på ett sätt som är mer hanterbart för ett datorprogram. Så kallade abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
-\subsubsection{Allmänt om träd}
+>> sec och subsec måste fixas <<
+\newline
+För att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)) måste de representeras med hjälp av en datastruktur. Detta underlettar processen att skriva en tolk som kan fatta strukturen av en ekvation dels hålla reda på ordningen (t.ex. multiplikation går före addition, osv.).
+\subsection{Träd som datastruktur}
 Inom datavetenskap beskrivs träd som en form av datastruktur för att representera hierarkisk data. Ett träd inom matematiken består av noder som är sammansatta på så vis att varje nod kan innefatta ett eller flera barn, som i sig också är noder. I det här dokumentet kallas barnen för subnoder. En subnods ``förälder'' kallas just så: förälder. Noder behöver dock ej innefatta några subnoder. Dessa noder kallas för löv. Varje nod behöver dock anta ett värde. Om en nod inte har en förälder betyder det att denna nod är högst upp i trädet. Denna nod kallas för rotnod eller bara rot.
+\subsubsection{Abstrakt syntaxträd}
+Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsubsection{Implementation av syntaxträd}
 Trädet utgår från en rotnod. Om trädet representerar en ekvation är denna nod alltid ett likhetstecken. Likhetsnoden kan bara anta två subnoder, en för VL och en för HL. Därefter kan leden byggas upp av olika slags noder. Om trädet representerar ett uttryck kan rotnoden vara precis vilken slags nod som helst bortsett från likhetstecken, då skulle ju trädet representera en ekvation!
 \subsubsection{Noder}
 \label{subsubsec:noder}
-En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)) eller operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Om noden är av sådan typ att den kräver argument, dvs. kräver ett eller flera värden för att själv få ett värde, kan noden själv anta noder (s.k. barnnoder, eng. child nodes) för att uppfylla sitt värde. Se Figur \ref{fig:2131}.
-\begin{figure}[h]
+Varje nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret värde (e.x. \(5\) eller \(10\)), en konstant (e.x. \(\pi\), \(e\)) eller operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Alla nummernoder och okända blir löv i trädstrukturen och allt annat kräver subnoder, eftersom man givetvis inte kan bygga upp ett uttryck med enbart operatörer. Se Figur \ref{fig:2131} för ett exempel på hur ett uttryck kan representeras med hjälp av en trädstruktur.
+\begin{figure}[H]
   %24
   \centering
   \includegraphics[width=0.3\textwidth]{image24}
@@ -73,13 +76,14 @@ En nod måste anta ett värde. Detta kan uppnås genom att ge noden ett konkret 
   \label{fig:2131}
 \end{figure}
 Eftersom programmet ska kunna hantera ekvationslösning, måste den okända variabeln kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\) den okända variabeln.) För att representera variabeln används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde (för koefficienten) och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
-\begin{figure}[h]
+\begin{figure}[H]
   %25
   \centering
   \includegraphics[width=0.3\textwidth]{image25}
   \caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\).}
   \label{fig:2132}
 \end{figure}
+>> how about ha 2.2 som "förenkling" och ha "allmänt om förenkling" som 2.2.1 och förenkling av alla typer av noder som en subsubsec? <<
 \subsection{Allmänt om förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsection{Homogena noder}
@@ -93,8 +97,7 @@ Homogena noder är de noder där ordningen av subnoder ej spelar någon roll, vi
   \includegraphics[width=0.3\textwidth]{image22}
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
-\end{figure}
-Första steget i förenklingen är att försumma staplade homogena noder av samma typ till en enda nod se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element slås ihop med varandra i sörsta möjliga utsträckning. Hur noder slås ihop hanteras olika av varje typ av nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
+\end{figure}Första steget i förenklingen är att försumma staplade homogena noder av samma typ till en enda nod se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element slås ihop med varandra i sörsta möjliga utsträckning. Hur noder slås ihop hanteras olika av varje typ av nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
 \begin{figure}[h!]
   %16
   \centering
