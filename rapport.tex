@@ -90,17 +90,19 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste okända variable
   \label{fig:2132}
 \end{figure}
 %how about ha 2.2 som "förenkling" och ha "allmänt om förenkling" som 2.2.1 och förenkling av alla typer av noder som en subsubsec?
-\subsection{Allmänt om förenkling}
+\subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
-\subsubsection{Allmän förenkling av homogena noder}
-\label{subsubsec:förenkling_homogena}
+\subsubsection{Homogena noder}
+\label{subsec:homogena}
+När man matar in ett uttryck i programmet skapas först ett träd där alla operatörsnoder har två subnoder, se Figur \ref{fig:2311}.
 \begin{figure}[h!]
   %22
   \centering
   \includegraphics[width=0.3\textwidth]{image22}
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
-\end{figure}Första steget i förenklingen är att försumma staplade homogena noder av samma typ till en enda nod se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element slås ihop med varandra i sörsta möjliga utsträckning. Hur noder slås ihop hanteras olika av varje typ av nod. Därför förklaras detta i detalj i samband med varje typ av nod.\par
+\end{figure}
+Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Hur noder sammanfogas beror beror på nodens typ. Därför förklaras detta under rubriken för de olika typerna av noder.
 \begin{figure}[h!]
   %16
   \centering
@@ -123,7 +125,7 @@ Förenklingen av en additionsnod fungerar genom att alla värden som kan summera
   \label{fig:2321}
 \end{figure}
 \subsubsection{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsubsec:förenkling_homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. För att lösa ut additionsnoder skapas alla kombinationer av additionsnodernas subnoder. Dessa kombinationerna multipliceras ihop tillsammans med de övriga noder och adderas ihop.
+Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsec:homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. För att lösa ut additionsnoder skapas alla kombinationer av additionsnodernas subnoder. Dessa kombinationerna multipliceras ihop tillsammans med de övriga noder och adderas ihop.
 \[ \left( a+b \right) \cdot \left( c+d \right) \cdot fg \]
 \[ \Leftrightarrow \]
 \[ acfg + adfg + bcfg+bdfg \]
