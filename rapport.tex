@@ -79,7 +79,7 @@ Varje nod måste anta ett värde. Detta kan uppnås genom att ge noden ett numer
 Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera tal och multiplikationsnod, som representerar multiplikatoin mellan två eller flera tal.
 \paragraph{Homogena och inhomogena operatörsnoder}
 \label{subsec:homogena}
-Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, vilket gör att subnoderna till operatörsnoderna kan lagras som en lista som ej är begränsad i kapacitet. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
+Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, vilket gör att subnoderna till operatörsnoderna kan lagras som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
 \paragraph{Enhetsnoder}
 Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
 \begin{figure}[H]
@@ -152,7 +152,7 @@ Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a\), därmed måste subtraktionsnoden anta endast två barnnoder; en för vänster sida och en för höger sida. För att förenkla subtraktionsnoden implementeras inget nytt. Den använder sig istället av additions noden och multiplikations noden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs ekvationen om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{image-merged3.png}
+  \includegraphics[width=0.5\textwidth]{image-merged3.png}
   \caption{\(a-b\) före och efter förenkling. Minus noden transformeras till en additionsnod med b ersatt med \(b \cdot -1\)}
 \end{figure}
 \subsubsection{Divisionsnod}
@@ -160,7 +160,7 @@ Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, 
 På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(\frac{a}{b}\Rightarrow a \cdot (b^{-1})\)
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{image-merged4.png}
+  \includegraphics[width=0.5\textwidth]{image-merged4.png}
   \caption{\(a/b\) förenklas till \(a \cdot (b^{-1})\)}
 \end{figure}
 \subsubsection{Kvadratrotnoder}
@@ -169,7 +169,7 @@ För att föränkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{sqrt.png}
-  \caption{\(\sqrt{x}\) föränklas till \(x^{0.5}\)}
+  \caption{\(\sqrt{x}\) förenklas till \(x^{0.5}\)}
 \end{figure}
 \subsection{Ekvationslösning}
 Att lösa ekvationer med en okänd (dvs. lösa ut x) innebär att först förenkla ekvationen så att en sida antar värdet 0. Därefter kommer olika regler appliceras på ekvationen beroende på vilken grad den är i. Vilken grad den är i bestäms av den högsta potensen.
@@ -308,7 +308,7 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
 Vi valde att skriva programmet i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
 
 \subsubsection{Github}
-Programmet sparades på GitHub, som är en service för versionshanteringsprogrammet git. GitHub underlättar programmeringsprocessen för projekt som innefattar flera deltagare. GitHub har också inbyggda funktioner för t.ex. problemhantering, då s.k. issues kan öppnas för att flagga upp utvecklarna att man har funnit ett eller flera problem i koden.
+Programmet sparades på GitHub, som är en service för versionshanteringsprogrammet git. Git underlättar programmeringsprocessen för projekt som innefattar flera deltagare. GitHub har också inbyggda funktioner för t.ex. problemhantering, då s.k. issues kan öppnas för att flagga upp utvecklarna att man har funnit ett eller flera problem i koden.
 
 \section{Diskussion}
 \subsection{Komplexitet}
