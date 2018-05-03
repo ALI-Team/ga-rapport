@@ -1,5 +1,6 @@
 import time
 import os
+import sys
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -25,6 +26,8 @@ try:
         cmd=input("cmd:")
         if cmd=="r":
             regen()
+        elif cmd == "q":
+            quit()
 except KeyboardInterrupt:
     observer.stop()
 observer.join()
