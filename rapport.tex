@@ -99,7 +99,7 @@ Operatörsnoder vars subnoder endast består av numeriska värden räknas helt e
 \subsubsection{Homogena operatörsnoder}
 \label{subsec:homogena}
 När man matar in ett uttryck i programmet skapas först ett träd där alla operatörsnoder har två subnoder, se Figur \ref{fig:2311}.
-\begin{figure}[h!]
+\begin{figure}[H!]
   %22
   \centering
   \includegraphics[width=0.3\textwidth]{image22}
@@ -107,7 +107,7 @@ När man matar in ett uttryck i programmet skapas först ett träd där alla ope
   \label{fig:2311}
 \end{figure}
 Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Subnoder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Hur noder sammanfogas beror beror på nodens typ. Därför förklaras detta under rubriken för de olika typerna av noder.
-\begin{figure}[h!]
+\begin{figure}[H!]
   %16
   \centering
   \includegraphics[width=0.5\textwidth]{image16}
@@ -122,11 +122,11 @@ Nummeriska värden summeras, \(5 + 10 \Rightarrow 15\) och enhetsnoder kombinera
   \caption{\(5x + 3x + 10 + 2\) förenklas till \(8x + 12\)}
   \label{fig:2321}
 \end{figure}
-\\
-\\
 \paragraph{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder separeras additionsnoder från övriga noder. För att lösa ut additionsnoder skapas alla kombinationer av additionsnodernas subnoder. Dessa kombinationer multipliceras ihop tillsammans med de övriga noderna och adderas ihop.
+Om additionsnoder multipliceras kommer dessa lösas ut genom att kombinationer av additionsnodernas subnoder adderas. Därefter multipliceras resten av multiplikationsnodernas subnoder med summan av kombinationerna.
 \[ \left( a+b \right) \cdot \left( c+d \right) \cdot ef \]
+\[ \Leftrightarrow \]
+\[ (ac + ad + bc + bd)\cdot ef \]
 \[ \Leftrightarrow \]
 \[ acef + adef + bcef + bdef \]
 Enhetsnoder med samma okänd kombineras genom att skapa en ny enhetsnod där enheten blir produkten av de enheterna för noderna och koefficienten produken av koefficienterna (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att multiplicera in i enhetsnodens koefficient\footnote{Se \ref{subsubsec:noder} Noder}.\par
