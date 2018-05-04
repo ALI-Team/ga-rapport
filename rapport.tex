@@ -92,7 +92,7 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste okända variable
 %how about ha 2.2 som "förenkling" och ha "allmänt om förenkling" som 2.2.1 och förenkling av alla typer av noder som en subsubsec?
 \subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
-\subsubsection{Homogena noder}
+\subsubsection{Homogena operatörsnoder}
 \label{subsec:homogena}
 När man matar in ett uttryck i programmet skapas först ett träd där alla operatörsnoder har två subnoder, se Figur \ref{fig:2311}.
 \begin{figure}[h!]
@@ -102,7 +102,7 @@ När man matar in ett uttryck i programmet skapas först ett träd där alla ope
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
 \end{figure}
-Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Hur noder sammanfogas beror beror på nodens typ. Därför förklaras detta under rubriken för de olika typerna av noder.
+Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Subnoder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Hur noder sammanfogas beror beror på nodens typ. Därför förklaras detta under rubriken för de olika typerna av noder.
 \begin{figure}[h!]
   %16
   \centering
