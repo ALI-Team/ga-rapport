@@ -272,7 +272,6 @@ Programmet innefattar nu dessa förmågor:
 \subsection{Vad kan biblioteket hantera}
 \subsubsection{Förenkling av uttryck}
 Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynomform, vilket kan vara fördelaktigt i vissa situationer, dock inte alla. Exempelvis för ekvationen \((x-3) \cdot (x-5)=0\) är det uppenbart att rötterna är \(x=3, x=5\) men i polynomform \(x^{2}-8x+15=0\) blir ekvationen lite svårare att lösa. I det här fallet skulle programmet fortfarande kunna lösa ekvationen i polynomform, men om ekvationen var av tredje graden eller högre skulle detta inte vara fallet.
-\par Nedan visas en tabell över olika uttryck och om de kan förenklas (och vad de förenklas till.)
 \begin{savenotes}
 \begin{figure}[H]
   \centering
@@ -285,7 +284,7 @@ Programmet strävar efter att förenkla ekvationen så den blir omskriven på po
     \(a - a\) & \(0\) \\
     \((a+b)^{2}\) & \(a^{2} + 2ab + b^{2}\) \\
     \(\frac{a}{a}\) & 1 \\
-    \((a+b+\ldots)^{k}\) & Se \ref{subsubsec:potensnod} \\
+    \((a+b+\ldots)^{k}\) & Utvecklas m.h.a. multinomialsatsen \\
     \(ak+am\) & \(a(k+m)\) \\
     \(\frac{a+b}{c+d}\) & Programmer kraschar
   \end{tabular}
