@@ -217,14 +217,19 @@ Två eller flera potensnoder kan multipliceras genom att exponenterna adderas. D
   \includegraphics[width=0.8\textwidth]{image32}
   \caption{\((a + b) \cdot (c + b)\) förenklas till \((a \cdot b) + (b \cdot c) + (b ^ 2) + (a \cdot c)\)}
 \end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{pow.png}
+  \caption{\(x^{a} \cdot x^{b}\) blir förenklat till \(x^{a+b}\)}
+\end{figure}
 \subsubsection{Inhomogena noder}
 \paragraph{Potensnod}
 \label{subsubsec:potensnod}
 Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett och en potensnod med potensen ett förenklas till basnoden. Om basnoden i sin tur är en potensnod skapas en ny potensnod med potenserna ihopmultiplicerade som potens och basen på subnoden som bas.
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{pow.png}
-  \caption{\(x^{a} \cdot x^{b}\) blir förenklat till \(x^{a+b}\)}
+  \includegraphics[width=0.5\textwidth]{pow2.png}
+  \caption{\(\left(\sqrt{x}\right)^2\) blir förenklat till \(x\)}
 \end{figure}
 \paragraph{Subtraktionsnod}
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a, a \neq b\). Därmed måste subtraktionsnoden anta endast två subnoder; en för vänster term och en för höger term. För att förenkla subtraktionsnoden används additionsnoden och multiplikationsnoden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs uttrycket om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
