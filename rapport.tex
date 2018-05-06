@@ -69,6 +69,97 @@ För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multi
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
 %exempel
+
+\subsection{Klasser och Objekt}
+\label{subsection:klasserochobjekt}
+En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
+\subsubsection{Objektorienterad programmering}
+\label{subsubsection:oop}
+Objektorienterad programmering funkar genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för egenskaper och funktioner. (Kan t.ex. liknas vid en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
+\subsubsection{Subklasser och arv}
+Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
+\section{Metod}                                                                
+\subsection{Implementation av syntaxträd}
+Trädet utgår från en rotnod. Om trädet representerar en ekvation är denna nod alltid ett likhetstecken. Likhetsnoden kan bara anta två subnoder, en för VL och en för HL. Därefter kan leden byggas upp av olika slags noder. Om trädet representerar ett uttryck kan rotnoden vara precis vilken slags nod som helst bortsett från likhetstecken, då skulle ju trädet representera en ekvation!
+\subsection{Noder}
+\label{subsubsec:noder}
+Varje nod måste anta ett värde. Med detta menas ett numeriskt värde (e.x. \(5\) eller \(10\)), eller en operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Alla nummernoder och okända blir löv i trädstrukturen. Alla andra sorters noder kräver subnoder, eftersom man givetvis inte kan bygga upp ett uttryck med enbart operatörer. Se Figur \ref{fig:2131} för ett exempel på hur ett uttryck kan representeras med hjälp av en trädstruktur.
+\begin{figure}[H]
+	%24
+	\centering
+	\includegraphics[width=0.3\textwidth]{image24}
+	\caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
+	\label{fig:2131}
+\end{figure}
+\paragraph{Operatörsnoder}
+Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera noder och divisionsnod, som representerar division mellan två noder.
+\paragraph{Homogena och inhomogena operatörsnoder}
+\label{subsec:operator}
+Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
+\paragraph{Enhetsnoder}
+Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
+\begin{figure}[H]
+	%25
+	\centering
+	\includegraphics[width=0.3\textwidth]{image25}
+	\caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\). Med \textit{Unit} menas enhet.}
+	\label{fig:2132}
+\end{figure}
+\subsubsection{Noder i OOP}
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
+\begin{figure}[h!]
+  \center
+  \includegraphics[width=1\textwidth]{image20}
+  \caption{Diagram av nodklassen samt dess alla subklasser.}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \begin{tabular}{l|p{10cm}}
+    \textbf{Namn} & \textbf{Användning} \\
+    \hline
+    \texttt{hash\_node} & Returnerar ett unikt nummer för just denna nod som används för att identifiera den. \\
+    \texttt{get\_children} & Returnerar subnoder. \\
+    \texttt{get\_int\_value} & Om noden går att räkna ut och resultatet är ett heltal returnera heltalet. \\
+    \texttt{latex} & Returnerar en latex representation. \\
+    \texttt{simplified} & Bygger upp en nod som är en förenkling av sig själv. \\
+    \texttt{eval} & Räknar ut värdet på en nod. \\
+    \texttt{eq} & Jämför noder (samma struktur, variabler etc.) \\
+    \texttt{formatted} & Returnerar en text representation av noden.
+  \end{tabular}
+  \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
+\end{figure}
+
+\subsection{Tolkning av inmatade ekvationer}
+För att läsa in uttryck på normal form och för att enkelt omvandla de till abstrakta syntaxträd krävs en lexikalisk analys av den inmatade datan som sedan tolkas av en parser. Att hantera lexikalisk analys och att utveckla en parser ligger utanför projektet. Därför användes biblioteket purplex, som utför denna lexikaliska analys och har en inbyggd parser.
+
+\subsubsection{Lexikalisk analys}
+\label{subsubsec:lexikaliskanal}
+En lexer separerar den inmatade datan till s.k. tokens baserat på fördefinierade mönster och bygger upp en array (lista) baserad på dessa tokens. Med andra ord letar en lexer efter ett sorts mönster i indatan och fyller på array-en med motsvarande tokens. Tokens känns igen med hjälp av mönstermatchningsspråket regex. Nedan visas en tabell över vilka mönster som letas efter och vad de ersätts med i listan i den lexikaliska analysen. 
+Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [värde, 10], [likhetstecken], [värde, 20])
+
+\begin{figure}[h!]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Mönster} & \textbf{Tokens} \\
+    \hline
+    Nummer & Nummernod \\
+    Bokstav & enhetsnod med värdet 1 \\
+    Nummer och bokstav & Enhetsnod med värdet nummer \\
+    \texttt{+} & Additionsnod \\
+    \texttt{-} & Subtraktionsnod \\
+    \texttt{*} & Multiplikationsnod \\
+    \texttt{/} & Divisionsnod \\
+    \texttt{\string^} & Potensnod \\
+    \texttt{=} & Ekvation
+  \end{tabular}
+  \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
+  \label{tab:lexer_patterns}
+\end{figure}
+
+\subsubsection{Parser}
+Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen\footnote{Se \ref{subsubsec:lexikaliskanal} Lexikalisk analys}. Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras.
+
 \subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsubsection{Homogena operatörsnoder}
@@ -161,95 +252,6 @@ Dessa metoder används för att bestämma värdet på en enhetsnod från en ekva
 \(ax^{2}+bx+c=0\Leftrightarrow x=-\frac{b}{2a}\pm \sqrt{\frac{b^{2}}{(2a)^{2}}-\frac{c}{a}}\)
 \paragraph{Enkla exponensialekvationer}
 \(a\cdot x^{b}+k=0\Leftrightarrow x=(\frac{-k}{a})^{\frac{1}{b}}\)
-\subsection{Klasser och Objekt}
-\label{subsection:klasserochobjekt}
-En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
-\subsubsection{Objektorienterad programmering}
-\label{subsubsection:oop}
-Objektorienterad programmering funkar genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för egenskaper och funktioner. (Kan t.ex. liknas vid en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
-\subsubsection{Subklasser och arv}
-Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
-\section{Metod}                                                                
-\subsection{Implementation av syntaxträd}
-Trädet utgår från en rotnod. Om trädet representerar en ekvation är denna nod alltid ett likhetstecken. Likhetsnoden kan bara anta två subnoder, en för VL och en för HL. Därefter kan leden byggas upp av olika slags noder. Om trädet representerar ett uttryck kan rotnoden vara precis vilken slags nod som helst bortsett från likhetstecken, då skulle ju trädet representera en ekvation!
-\subsection{Noder}
-\label{subsubsec:noder}
-Varje nod måste anta ett värde. Med detta menas ett numeriskt värde (e.x. \(5\) eller \(10\)), eller en operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Alla nummernoder och okända blir löv i trädstrukturen. Alla andra sorters noder kräver subnoder, eftersom man givetvis inte kan bygga upp ett uttryck med enbart operatörer. Se Figur \ref{fig:2131} för ett exempel på hur ett uttryck kan representeras med hjälp av en trädstruktur.
-\begin{figure}[H]
-	%24
-	\centering
-	\includegraphics[width=0.3\textwidth]{image24}
-	\caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
-	\label{fig:2131}
-\end{figure}
-\paragraph{Operatörsnoder}
-Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera noder och divisionsnod, som representerar division mellan två noder.
-\paragraph{Homogena och inhomogena operatörsnoder}
-\label{subsec:operator}
-Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
-\paragraph{Enhetsnoder}
-Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
-\begin{figure}[H]
-	%25
-	\centering
-	\includegraphics[width=0.3\textwidth]{image25}
-	\caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\). Med \textit{Unit} menas enhet.}
-	\label{fig:2132}
-\end{figure}
-\subsubsection{Noder i OOP}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
-\begin{figure}[h!]
-  \center
-  \includegraphics[width=1\textwidth]{image20}
-  \caption{Diagram av nodklassen samt dess alla subklasser.}
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-  \begin{tabular}{l|p{10cm}}
-    \textbf{Namn} & \textbf{Användning} \\
-    \hline
-    \texttt{hash\_node} & Returnerar ett unikt nummer för just denna nod som används för att identifiera den. \\
-    \texttt{get\_children} & Returnerar subnoder. \\
-    \texttt{get\_int\_value} & Om noden går att räkna ut och resultatet är ett heltal returnera heltalet. \\
-    \texttt{latex} & Returnerar en latex representation. \\
-    \texttt{simplified} & Bygger upp en nod som är en förenkling av sig själv. \\
-    \texttt{eval} & Räknar ut värdet på en nod. \\
-    \texttt{eq} & Jämför noder (samma struktur, variabler etc.) \\
-    \texttt{formatted} & Returnerar en text representation av noden.
-  \end{tabular}
-  \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
-\end{figure}
-
-\subsection{Tolkning av inmatade ekvationer}
-För att läsa in uttryck på normal form och för att enkelt omvandla de till abstrakta syntaxträd krävs en lexikalisk analys av den inmatade datan som sedan tolkas av en parser. Att hantera lexikalisk analys och att utveckla en parser ligger utanför projektet. Därför användes biblioteket purplex, som utför denna lexikaliska analys och har en inbyggd parser.
-
-\subsubsection{Lexikalisk analys}
-\label{subsubsec:lexikaliskanal}
-En lexer separerar den inmatade datan till s.k. tokens baserat på fördefinierade mönster och bygger upp en array (lista) baserad på dessa tokens. Med andra ord letar en lexer efter ett sorts mönster i indatan och fyller på array-en med motsvarande tokens. Tokens känns igen med hjälp av mönstermatchningsspråket regex. Nedan visas en tabell över vilka mönster som letas efter och vad de ersätts med i listan i den lexikaliska analysen. 
-Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [värde, 10], [likhetstecken], [värde, 20])
-
-\begin{figure}[h!]
-  \centering
-  \begin{tabular}{l|l}
-    \textbf{Mönster} & \textbf{Tokens} \\
-    \hline
-    Nummer & Nummernod \\
-    Bokstav & enhetsnod med värdet 1 \\
-    Nummer och bokstav & Enhetsnod med värdet nummer \\
-    \texttt{+} & Additionsnod \\
-    \texttt{-} & Subtraktionsnod \\
-    \texttt{*} & Multiplikationsnod \\
-    \texttt{/} & Divisionsnod \\
-    \texttt{\string^} & Potensnod \\
-    \texttt{=} & Ekvation
-  \end{tabular}
-  \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
-  \label{tab:lexer_patterns}
-\end{figure}
-
-\subsubsection{Parser}
-Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen\footnote{Se \ref{subsubsec:lexikaliskanal} Lexikalisk analys}. Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras. 
 
 \subsection{Bilder på träd}
 Bilderna på träden som används relativt ofta i denna rapport är också del av GAMLP, som har möjligheten att generera bilder av träd. Dessa genereras med hjälp av biblioteket \textit{graphviz}. För varje träd går programmet igenom trädet uppifrån och ner och skapar listor med alla noder och kanter. Programmet beskriver sedan kod med dotsyntax, som sedan tolkas med programmet dot för att generera en bild på trädet.
@@ -404,7 +406,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
 \section{\\Hur man använder biblioteket/programmet}
 \subsection{\\Installationskrav}
 \begin{itemize}
-  \item macOS / BSD / Linux / cygwin(Windows) / termux(Android)
+  \item GNU+Linux / BSD / macOS / termux(Android) / cygwin(Windows)
   \item Python 3
   \item Purplex
   \item PIL
