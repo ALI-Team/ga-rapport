@@ -78,7 +78,7 @@ Varje nod måste anta ett värde. Detta kan uppnås genom att ge noden ett numer
 \paragraph{Operatörsnoder}
 Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera tal och multiplikationsnod, som representerar multiplikatoin mellan två eller flera tal.
 \paragraph{Homogena och inhomogena operatörsnoder}
-\label{subsec:homogena}
+\label{subsec:operator}
 Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, vilket gör att subnoderna till operatörsnoderna kan lagras som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
 \paragraph{Enhetsnoder}
 Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
@@ -372,6 +372,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   Python Software Foundation ,
   [2017-2018]
 \end{thebibliography}
+\newpage
 \begin{appendices}
 \section{\\Begrepp}
 \begin{figure}[h!]
@@ -382,8 +383,8 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
     Nod & En det av trädet & \ref{subsec:trees} \\
     Subnod & En nod under en annan nod & \ref{subsec:trees} \\
     Rotnod & Noden högs upp i trädet & \ref{subsec:trees} \\
-    Homogena noder & Operatörsnoder där ordningen inte spelar någon roll(+,\(\cdot\)) & \ref{subsec:homogena} \\
-    Inhomogena noder & Operatörsnoder där ordningen spelar roll(-,/) & \ref{subsec:inhomogena_noder} \\
+    Homogena noder & Operatörsnoder där ordningen inte spelar någon roll(+,\(\cdot\)) & \ref{subsec:operator} \\
+    Inhomogena noder & Operatörsnoder där ordningen spelar roll(-,/) & \ref{subsec:operator} \\
     Lexikalisk analys & Sepererar en text rad tex 'a+b' blir a,+,b & \ref{subsubsec:lexikaliskanal} \\
     Token & sv tecken, i detta fallet delar av ett utryck tex ett tal & \ref{subsubsec:lexikaliskanal} \\
     Parser & Gör om en lista av tokens till ett träd med avsende till prioritet & \ref{subsubsec:lexikaliskanal} \\
