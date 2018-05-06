@@ -69,7 +69,7 @@ För att utveckla potenser av multinom e.x: \[(a + b + c)^{3}=a^3+3a^2b+3a^2c+3a
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
 %exempel
-
+\newpage
 \subsection{Klasser och Objekt}
 \label{subsection:klasserochobjekt}
 En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
@@ -163,6 +163,7 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [vä
 \subsubsection{Parser}
 Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen\footnote{Se \ref{subsubsec:lexikaliskanal} Lexikalisk analys}. Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras.
 
+\newpage
 \subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsubsection{Homogena operatörsnoder}
@@ -246,10 +247,11 @@ På samma sätt som subtraktionsnoden skiver om uttrycket till en additionsnod s
   \includegraphics[width=0.5\textwidth]{image-merged4.png}
   \caption{\(\frac{a}{b}\) förenklas till \(a \cdot \left(b^{-1}\right)\)}
 \end{figure}
+\newpage
 \paragraph{Kvadratrotnoder}
 \label{subsubsec:sqrtnod}
 För att förenkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x^{\frac{1}{2}}\)
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{sqrt.png}
   \caption{\(\sqrt{x}\) förenklas till \(x^{\frac{1}{2}}\)}
@@ -329,7 +331,7 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
   \captionof{table}{Ekvationer och om de kan lösas}
   \label{tab:lexer_patterns}
 \end{figure}
-
+\newpage
 \subsection{Arbetsprocess}
 \subsubsection{Python}
 Vi valde att skriva programmet i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
@@ -370,7 +372,7 @@ Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken
 Proofwiki är en wiki för matematiska bevis. För att skriva och ändra krävs godkännande, medlemskap söks inte skapas. Den är fortfarande overifierad med eftersom informationen överensstämmer med britannica.
 \subsubsection{Python.org}
 Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt trovärdig. Dessutom är även den här typen av information antingen fungerande eller inte. 
-
+\newpage
 \begin{thebibliography}{9}
 
 \bibitem{kth}
