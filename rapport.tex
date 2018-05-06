@@ -106,8 +106,8 @@ När man matar in ett uttryck i programmet skapas först ett träd där alla ope
   \caption{\((a + b + c + d + e)\) tolkat av programmet.}
   \label{fig:2311}
 \end{figure}
-Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Subnoder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Hur noder sammanfogas beror beror på nodens typ. Därför förklaras detta under rubriken för de olika typerna av noder.
-\begin{figure}[H]
+Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder av samma typ till en enda nod, se Figur \ref{fig:2312}. Noder med ett numerisk värde separeras från de andra, övriga element sammanfogas i största möjliga utsträckning. Ett exempel på en sammanslagning är \(x + x = 2x \). Hur noder sammanfogas beror beror på nodens typ, därför förklaras detta under rubriken för de olika typerna av noder.
+\begin{figure}[h!]
   %16
   \centering
   \includegraphics[width=0.5\textwidth]{image16}
@@ -391,5 +391,26 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
     Klass & Ritning för ett objekt & \ref{subsubsection:oop} \\
   \end{tabular}
 \end{figure}
+\section{\\Hur man använder biblioteket/programmet}
+\subsection{\\Installation krav}
+\begin{itemize}
+  \item Linux/cygwin(windows)/termux(android)
+  \item Python 3
+  \item Purplex
+  \item PIL
+\end{itemize}
+\subsection{\\Valfria krav}
+\begin{itemize}
+  \item Graphviz
+  \item Feh
+\end{itemize}
+\subsection{\\Installations instruktioner}
+\begin{enumerate}
+  \item Klona gamlp källkoden från github ``git clone https://github.com/ALI-Team/GAMLP.git''
+  \item Kör installations skriptet setup.py (administratörs rättigheter kan behövas) ``python setup.py install''
+\end{enumerate}
+\subsection{\\Använding av programmet}
+Biblioteket kommer med ett programm för att enkelt kunna testa/använda det. Kör ``gamlp'' i terminalen för att starta det.\\
+Utryck kan sedan direkt mattas i programmet och programmet kommer retunera resulatet av utrycket som bearbetas utefrån flaggor. För att visa tillgängliga flaggor används kommandot ``flags'', för att sätta en flagga används kommandot ``set [namn] [on/off]''.
 \end{appendices}
 \end{document}
