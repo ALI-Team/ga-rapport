@@ -52,7 +52,7 @@ Eftersom vi alla i gruppen delar en stor passion för programmering ville vi gö
 \par
 Syftet med arbetet är att undersöka hur verktyg såsom WolframAlpha fungerar, dvs. hur inmatad data tolkas, hanteras och förenklas och utifrån det skriva ett bibliotek som kan förenkla uttryck och lösa ekvationer. Arbetet har utgått från följande frågeställningar:
 \begin{itemize}
-	\item Hur kan inmatad data tolkas och representeras som en trädstruktur?
+	\item Hur kan inmatad data representerad som trädstruktur tolkas och arbetas med av ett program?
 	\item Hur kan uttryck förenklas m.h.a. dessa trädstrukturer?
 	\item Hur kan algoritmer användas för att lösa ekvationer?
 \end{itemize}
@@ -63,32 +63,6 @@ För att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)
 Inom datavetenskap beskrivs träd som en form av graf som används för att representera hierarkisk data. Ett träd inom matematiken består av noder som är sammansatta på så vis att varje nod kan innefatta ett eller flera barn, som i sig också är noder. I det här dokumentet kallas barnen för subnoder. En subnods ``förälder'' kallas just så: förälder. Noder behöver dock ej innefatta några subnoder, dessa noder kallas för löv. Varje nod behöver dock anta ett värde. Om en nod inte har en förälder betyder det att denna nod är högst upp i trädet. Denna nod kallas för rotnod eller bara rot.
 \subsubsection{Abstrakt syntaxträd}
 Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
-\subsubsection{Implementation av syntaxträd}
-Trädet utgår från en rotnod. Om trädet representerar en ekvation är denna nod alltid ett likhetstecken. Likhetsnoden kan bara anta två subnoder, en för VL och en för HL. Därefter kan leden byggas upp av olika slags noder. Om trädet representerar ett uttryck kan rotnoden vara precis vilken slags nod som helst bortsett från likhetstecken, då skulle ju trädet representera en ekvation!
-\subsubsection{Noder}
-\label{subsubsec:noder}
-Varje nod måste anta ett värde. Med detta menas ett numeriskt värde (e.x. \(5\) eller \(10\)), eller en operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Alla nummernoder och okända blir löv i trädstrukturen. Alla andra sorters noder kräver subnoder, eftersom man givetvis inte kan bygga upp ett uttryck med enbart operatörer. Se Figur \ref{fig:2131} för ett exempel på hur ett uttryck kan representeras med hjälp av en trädstruktur.
-\begin{figure}[H]
-  %24
-  \centering
-  \includegraphics[width=0.3\textwidth]{image24}
-  \caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
-  \label{fig:2131}
-\end{figure}
-\paragraph{Operatörsnoder}
-Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera noder och divisionsnod, som representerar division mellan två noder.
-\paragraph{Homogena och inhomogena operatörsnoder}
-\label{subsec:operator}
-Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
-\paragraph{Enhetsnoder}
-Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
-\begin{figure}[H]
-  %25
-  \centering
-  \includegraphics[width=0.3\textwidth]{image25}
-  \caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\). Med \textit{Unit} menas enhet.}
-  \label{fig:2132}
-\end{figure}
 \subsection{Multinomialsatsen}
 För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
@@ -124,6 +98,7 @@ Nummeriska värden summeras, \(5 + 10 \Rightarrow 15\) och enhetsnoder kombinera
   \label{fig:2321}
 \end{figure}
 \paragraph{Multiplikationsnod}
+%x^a * x^b = x^(a+b)
 Om additionsnoder multipliceras kommer dessa lösas ut genom att kombinationer av additionsnodernas subnoder adderas. Därefter multipliceras resten av multiplikationsnodernas subnoder med summan av kombinationerna.
 \[ \left( a+b \right) \cdot \left( c+d \right) \cdot ef \]
 \[ \Leftrightarrow \]
@@ -150,9 +125,9 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
 \subsubsection{Inhomogena noder}
 \paragraph{Potensnod}
 \label{subsubsec:potensnod}
-Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens 0 förenklas till en nummernod med värdet ett. 
+Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett. 
 \paragraph{Subtraktionsnod}
-Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a\), därmed måste subtraktionsnoden anta endast två barnnoder; en för vänster sida och en för höger sida. För att förenkla subtraktionsnoden implementeras inget nytt. Den använder sig istället av additions noden och multiplikations noden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs ekvationen om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
+Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a, a \neq b\). Därmed måste subtraktionsnoden anta endast två subnoder; en för vänster term och en för höger term. För att förenkla subtraktionsnoden används additionsnoden och multiplikationsnoden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs uttrycket om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{image-merged3.png}
@@ -160,25 +135,25 @@ Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, 
 \end{figure}
 \paragraph{Divisionsnod}
 \label{subsubsec:divnode}
-På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(\frac{a}{b}\Rightarrow a \cdot (b^{-1})\)
+På samma sätt som subtraktionsnoden skiver om uttrycket till en additionsnod så skriver divisionsnoden om uttrycket så att förenklingen istället kan hanteras av multiplikationsnoden och potensnoden. \(\frac{a}{b}\Rightarrow a \cdot \left(b^{-1}\right)\)
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{image-merged4.png}
-  \caption{\(a/b\) förenklas till \(a \cdot (b^{-1})\)}
+  \caption{\(\frac{a}{b}\) förenklas till \(a \cdot \left(b^{-1}\right)\)}
 \end{figure}
 \paragraph{Kvadratrotnoder}
 \label{subsubsec:sqrtnod}
-För att föränkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x^{0.5}\)
+För att förenkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x^{\frac{1}{2}}\)
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{sqrt.png}
-  \caption{\(\sqrt{x}\) förenklas till \(x^{0.5}\)}
+  \caption{\(\sqrt{x}\) förenklas till \(x^{\frac{1}{2}}\)}
 \end{figure}
 \subsection{Ekvationslösning}
-En ekvation löses genom att först subtrahera högeledet från båda led så att högerledet blir 0. Mer specifikt skapas en subtraktionsnod med båda leden som subnoder, som därefter förenklas. 
-\par Detta leder till att ekvationen kan lösas med en allmän metod som väljs beroende på vilken grad ekvationen är representerad i. Vilken grad den är representerad i bestäms av den enhetsnod med högst potens.
+En ekvation löses genom att först subtrahera högerledet från båda led så att högerledet blir 0. Mer specifikt skapas en subtraktionsnod med båda leden som subnoder, som därefter förenklas. 
+\par Detta leder till att ekvationen kan lösas med en allmän metod som väljs beroende på vilken grad ekvationen är av. Vilken grad ekvationen är av bestäms enhetsnoden med högst potens.
 \subsubsection{Ekvationsmetoder}
-Dessa metoder används för att få ut värdet på en enhetsnod från en ekvation.
+Dessa metoder används för att bestämma värdet på en enhetsnod från en ekvation.
 \label{subsubsec:Ekvationsmetoder}
 \paragraph{Förstagradsekvationer}
 \(kx+m=0\Leftrightarrow x=\frac{-m}{k}\)
@@ -188,15 +163,41 @@ Dessa metoder används för att få ut värdet på en enhetsnod från en ekvatio
 \(a\cdot x^{b}+k=0\Leftrightarrow x=(\frac{-k}{a})^{\frac{1}{b}}\)
 \subsection{Klasser och Objekt}
 \label{subsection:klasserochobjekt}
-En viktig del av struktureringen av noder \footnote {se \ref{subsubsec:noder}, Noder} handlar om att en nod kan vara en utökad typ av en annan nod. Det vill säga, istället för att på nytt skapa varenda nod kan man istället skapa en generell nod för t.ex. operatörer, och sedan utöka den för varje sorts operation. Detta kallas för Objektorienterad Programmering (Object Oriented Programming, OOP). 
+En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
 \subsubsection{Objektorienterad programmering}
 \label{subsubsection:oop}
-I princip funkar objektorienterad programmering genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för attributer och handlingar. (Kan liknas t.ex. en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel som är enkelt att förstå är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
+Objektorienterad programmering funkar genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för egenskaper och funktioner. (Kan t.ex. liknas vid en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
 \subsubsection{Subklasser och arv}
-Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet\footnote{se \ref{subsection:klasserochobjekt} Klasser och Objekt} kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
-\section{Metod}                                                                                      
+Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
+\section{Metod}                                                                
+\subsection{Implementation av syntaxträd}
+Trädet utgår från en rotnod. Om trädet representerar en ekvation är denna nod alltid ett likhetstecken. Likhetsnoden kan bara anta två subnoder, en för VL och en för HL. Därefter kan leden byggas upp av olika slags noder. Om trädet representerar ett uttryck kan rotnoden vara precis vilken slags nod som helst bortsett från likhetstecken, då skulle ju trädet representera en ekvation!
 \subsection{Noder}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för metoder som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder\footnote{Se \ref{subsec:homogena} Homogena noder}.
+\label{subsubsec:noder}
+Varje nod måste anta ett värde. Med detta menas ett numeriskt värde (e.x. \(5\) eller \(10\)), eller en operator (e.x. \(+\), \(-\), \(\cdot\), \(\div\), \string^). Alla nummernoder och okända blir löv i trädstrukturen. Alla andra sorters noder kräver subnoder, eftersom man givetvis inte kan bygga upp ett uttryck med enbart operatörer. Se Figur \ref{fig:2131} för ett exempel på hur ett uttryck kan representeras med hjälp av en trädstruktur.
+\begin{figure}[H]
+	%24
+	\centering
+	\includegraphics[width=0.3\textwidth]{image24}
+	\caption{Visuell representation av \((2x + 3) - 5\) som ett abstrakt syntaxträd.}
+	\label{fig:2131}
+\end{figure}
+\paragraph{Operatörsnoder}
+Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera noder och divisionsnod, som representerar division mellan två noder.
+\paragraph{Homogena och inhomogena operatörsnoder}
+\label{subsec:operator}
+Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
+\paragraph{Enhetsnoder}
+Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
+\begin{figure}[H]
+	%25
+	\centering
+	\includegraphics[width=0.3\textwidth]{image25}
+	\caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\). Med \textit{Unit} menas enhet.}
+	\label{fig:2132}
+\end{figure}
+\subsubsection{Noder i OOP}
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
 \begin{figure}[h!]
   \center
   \includegraphics[width=1\textwidth]{image20}
@@ -261,27 +262,35 @@ Strukturen av projektet baserades till viss del på ett examensarbete vid namn \
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \section{Resultat}
-\subsection{Vilka förmågor innefattar biblioteket}
-\subsubsection{Förenkling}
-Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynomform, vilket kan vara fördelaktigt i vissa situationer, dock inte alla.
+Programmet innefattar nu dessa förmågor:
+\begin{itemize}
+	\item Representera inmatad data som syntaxträd
+	\item Rekursivt förenkla operationer samt korrekt kunna hantera okända variabler för att förenkla uttryck.
+	\item Lösa ut okända variabler från ekvationer genom att använda olika metoder för olika ekvationsgrad.
+\end{itemize}
+
+\subsection{Vad kan biblioteket hantera}
+\subsubsection{Förenkling av uttryck}
+Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynomform, vilket kan vara fördelaktigt i vissa situationer, dock inte alla. Exempelvis för ekvationen \((x-3) \cdot (x-5)=0\) är det uppenbart att rötterna är \(x=3, x=5\) men i polynomform \(x^{2}-8x+15=0\) blir ekvationen lite svårare att lösa. I det här fallet skulle programmet fortfarande kunna lösa ekvationen i polynomform, men om ekvationen var av tredje graden eller högre skulle detta inte vara fallet.
+\par Nedan visas en tabell över olika uttryck och om de kan förenklas (och vad de förenklas till.)
 \begin{savenotes}
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \begin{tabular}{l|l}
     \textbf{Uttryck} & \textbf{Förenklas till} \\
     \hline
-    \(\frac{ac + bc}{c}\) & Kan ej förenklas \\
+    \(\frac{ac + bc}{c}\) & \(a+b\) \\
     \(a+a\) & \(2a\) \\
     \(a \cdot a\) & \(a^{2}\) \\
     \(a - a\) & \(0\) \\
     \((a+b)^{2}\) & \(a^{2} + 2ab + b^{2}\) \\
-    \(\frac{a}{a}\) & Kan ej förenklas \footnote{Det triviala uttrycket \(\frac{a}{a}\) kan ej förenklas då biblioteket ej kan hantera \(a^{-1}\). Se \ref{subsubsec:divnode}} \\
+    \(\frac{a}{a}\) & 1 \\
     \((a+b+\ldots)^{k}\) & Se \ref{subsubsec:potensnod} \\
     \(ak+am\) & \(a(k+m)\) \\
     \(\frac{a+b}{c+d}\) & Programmer kraschar
   \end{tabular}
   \captionof{table}{Uttryck och vad de förenklas till (om möjligt)}
-  \label{tab:expressions}
+  \label{tab:expressions}Vissa saknas
 \end{figure}
 \end{savenotes}
 
@@ -334,7 +343,7 @@ Vi har lärt oss essenserna av syntaxträd och hur man kan strukturera de, inklu
 \par
 Algoritmen för potensnoden krävde att vi skulle känna till multinomialsatsen; något som ingen av oss kände till innan projektet.
 
-\subsection{Källkritik}
+\section{Källkritik}
 Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen funkar en algoritm eller inte, det går inte att vinkla en algoritm. 
 \subsubsection{KTH}
 Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Examensarbetet kontrollerades av handledare och därför kan vi vara säkra på att källan är pålitlig. Dessutom är KTH ett väldigt välrespekterat universitet.
@@ -384,13 +393,8 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
     Nod & En det av trädet & \ref{subsec:trees} \\
     Subnod & En nod under en annan nod & \ref{subsec:trees} \\
     Rotnod & Noden högs upp i trädet & \ref{subsec:trees} \\
-<<<<<<< HEAD
     Homogena noder & Operatörsnoder där ordningen inte spelar någon roll(+,\(\cdot\)) & \ref{subsec:homogena} \\
     Inhomogena noder & Operatörsnoder där ordningen spelar roll(-,/) & \ref{subsec:homogena} \\
-=======
-    Homogena noder & Operatörsnoder där ordningen inte spelar någon roll(+,\(\cdot\)) & \ref{subsec:operator} \\
-    Inhomogena noder & Operatörsnoder där ordningen spelar roll(-,/) & \ref{subsec:operator} \\
->>>>>>> f444193835633dc89b3ef5cbc42c7764ff507378
     Lexikalisk analys & Sepererar en text rad tex 'a+b' blir a,+,b & \ref{subsubsec:lexikaliskanal} \\
     Token & sv tecken, i detta fallet delar av ett utryck tex ett tal & \ref{subsubsec:lexikaliskanal} \\
     Parser & Gör om en lista av tokens till ett träd med avsende till prioritet & \ref{subsubsec:lexikaliskanal} \\
@@ -413,8 +417,8 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
 \end{itemize}
 \subsection{\\Installations instruktioner}
 \begin{enumerate}
-  \item Klona gamlp källkoden från github ``git clone https://github.com/ALI-Team/GAMLP.git''
-  \item Kör installations skriptet setup.py (administratörs rättigheter kan behövas) ``python setup.py install''
+  \item Ladda ner GAMLPs källkod från github \begin{verbatim}git clone https://github.com/ALI-Team/GAMLP.git\end{verbatim}
+  \item Kör installations skriptet setup.py (administratörs rättigheter kan behövas) \begin{verbatim}python(3) setup.py install\end{verbatim}
 \end{enumerate}
 \subsection{\\Använding av programmet}
 Biblioteket kommer med ett program för att enkelt kunna testa/använda det. Kör ``gamlp'' i terminalen för att starta det.\\
