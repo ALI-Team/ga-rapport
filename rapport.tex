@@ -153,6 +153,7 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [vä
     \texttt{*} & Multiplikationsnod \\
     \texttt{/} & Divisionsnod \\
     \texttt{\string^} & Potensnod \\
+    \texttt{\(\sqrt{}\)} & Kvadratrotsnod \\
     \texttt{=} & Ekvation
   \end{tabular}
   \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
@@ -219,6 +220,11 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
 \paragraph{Potensnod}
 \label{subsubsec:potensnod}
 Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett och en potensnod med potensen ett förenklas till basnoden. Om basnoden i sin tur är en potensnod skapas en ny potensnod med potenserna ihopmultiplicerade som potens och basen på subnoden som bas.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{pow.png}
+  \caption{\(x^{a} \cdot x^{b}\) blir förenklat till \(x^{a+b}\)}
+\end{figure}
 \paragraph{Subtraktionsnod}
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a, a \neq b\). Därmed måste subtraktionsnoden anta endast två subnoder; en för vänster term och en för höger term. För att förenkla subtraktionsnoden används additionsnoden och multiplikationsnoden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs uttrycket om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
@@ -409,6 +415,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \begin{tabular}{l|l|l}
     \textbf{Uttryck} & \textbf{Förklaring} & \textbf{Se} \\
     \hline
+    Träd & En riktad graf utan cykler & \ref{subsec:trees} \\
     Nod & En det av trädet & \ref{subsec:trees} \\
     Subnod & En nod under en annan nod & \ref{subsec:trees} \\
     Rotnod & Noden högs upp i trädet & \ref{subsec:trees} \\
