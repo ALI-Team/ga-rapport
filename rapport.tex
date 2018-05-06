@@ -174,10 +174,10 @@ För att föränkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x
   \caption{\(\sqrt{x}\) förenklas till \(x^{0.5}\)}
 \end{figure}
 \subsection{Ekvationslösning}
-Att lösa ekvationer med en okänd (dvs. lösa ut x) innebär att först förenkla ekvationen så att en sida antar värdet 0. Därefter kommer olika regler appliceras på ekvationen beroende på vilken grad den är i. Vilken grad den är i bestäms av den högsta potensen.
-
-När en ekvation löses förenklas den först så högerled är lika med 0. Sen går den igenom alla direkta subnoder nod för nod och kolla efter okända och potens. Programmet kan bara lösa ekvationer med en okänd. Den högsta exponenten på den okända är graden på ekvationen. Programmet har en samling av olika metoder för att lösa ekvationer och hittar den lämpligaste metoden och utför den. Vilka metoder som används beskrivs i \ref{subsubsec:Ekvationsmetoder}.
+En ekvation löses genom att först subtrahera högeledet från båda led så att högerledet blir 0. Mer specifikt skapas en subtraktionsnod med båda leden som subnoder, som därefter förenklas. 
+\par Detta leder till att ekvationen kan lösas med en allmän metod som väljs beroende på vilken grad ekvationen är representerad i. Vilken grad den är representerad i bestäms av den enhetsnod med högst potens.
 \subsubsection{Ekvationsmetoder}
+Dessa metoder används för att få ut värdet på en enhetsnod från en ekvation.
 \label{subsubsec:Ekvationsmetoder}
 \paragraph{Förstagradsekvationer}
 \(kx+m=0\Leftrightarrow x=\frac{-m}{k}\)
