@@ -89,13 +89,17 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste okända variable
   \caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\).}
   \label{fig:2132}
 \end{figure}
-%how about ha 2.2 som "förenkling" och ha "allmänt om förenkling" som 2.2.1 och förenkling av alla typer av noder som en subsubsec?
+\subsection{Multinomialsatsen}
+För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
+\[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
+Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
+\[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
 \subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
-\subsubsection{Homogena noder}
+\subsubsection{Homogena operatörsnoder}
 \label{subsec:homogena}
 När man matar in ett uttryck i programmet skapas först ett träd där alla operatörsnoder har två subnoder, se Figur \ref{fig:2311}.
-\begin{figure}[h!]
+\begin{figure}[H]
   %22
   \centering
   \includegraphics[width=0.3\textwidth]{image22}
@@ -110,28 +114,30 @@ Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder
   \caption{\((a + b + c + d + e)\) efter första steget av förenkling av homogen nod}
   \label{fig:2312}
 \end{figure}
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.9\textwidth]{image-merged}
-  \caption{\((a \cdot b \cdot c \cdot 3 \cdot 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
-  \label{fig:2313}
-\end{figure}
-\subsubsection{Additionsnod}
-Förenklingen av en additionsnod fungerar genom att alla värden som kan summeras, summeras. Oftast innebär detta alla noder med numeriska värden. Enhetsnoder summeras om möjligt (ex. \(5x + 3x = 8x\)), se Figur \ref{fig:2321}, och behålls som subnoder för additionsnoden.
+\paragraph{Additionsnod}
+Nummeriska värden summeras, \(5 + 10 \Rightarrow 15\) och enhetsnoder kombineras genom att dess koeficient sätts baserat på antalet, exempelvis \(x + x + x = 3x\), eller \(5x + 3x = 8x\), se Figur \ref{fig:2321}.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{image-merged2}
   \caption{\(5x + 3x + 10 + 2\) förenklas till \(8x + 12\)}
   \label{fig:2321}
 \end{figure}
-\subsubsection{Multiplikationsnod}
-Efter de generella förenklingarna av homogena noder\footnote{Se \ref{subsec:homogena} Allmän förenkling av homogena noder} separeras additionsnoder från övriga noder. För att lösa ut additionsnoder skapas alla kombinationer av additionsnodernas subnoder. Dessa kombinationerna multipliceras ihop tillsammans med de övriga noder och adderas ihop.
-\[ \left( a+b \right) \cdot \left( c+d \right) \cdot fg \]
+\paragraph{Multiplikationsnod}
+Om additionsnoder multipliceras kommer dessa lösas ut genom att kombinationer av additionsnodernas subnoder adderas. Därefter multipliceras resten av multiplikationsnodernas subnoder med summan av kombinationerna.
+\[ \left( a+b \right) \cdot \left( c+d \right) \cdot ef \]
 \[ \Leftrightarrow \]
-\[ acfg + adfg + bcfg+bdfg \]
+\[ (ac + ad + bc + bd)\cdot ef \]
+\[ \Leftrightarrow \]
+\[ acef + adef + bcef + bdef \]
 Enhetsnoder med samma okänd kombineras genom att skapa en ny enhetsnod där enheten blir produkten av de enheterna för noderna och koefficienten produken av koefficienterna (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att multiplicera in i enhetsnodens koefficient\footnote{Se \ref{subsubsec:noder} Noder}.\par
 En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
-\begin{figure}[h!]
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{image-merged}
+  \caption{\((a \cdot b \cdot c \cdot 3 \cdot 5)\) förenklas i tre steg, a,b,c lyfts upp till samma nod och talen separeras till sin egen nod, tillslut räknas talen ihop.}
+  \label{fig:2313}
+\end{figure}
+\begin{figure}[H]
   %26
   %32
   \centering
@@ -139,23 +145,19 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
   \includegraphics[width=0.8\textwidth]{image32}
   \caption{\((a + b) \cdot (c + b)\) förenklas till \((a \cdot b) + (b \cdot c) + (b ^ 2) + (a \cdot c)\)}
 \end{figure}
-\\
-\\
-\\
-\subsubsection{Potensnod}
+\subsubsection{Inhomogena noder}
+Hur inhomogena noder förenklas beror på nodens typ.
+\paragraph{Potensnod}
 \label{subsubsec:potensnod}
-Potensnoder innehåller två barnnoder, basen och exponenten. En potensnod med en additionsnod i basen, exempelvis \((a+b+c)^{3}\). En potensnod med potens 0 kommer bytas ut mot en heltalsnod med värdet 1, en potensnod med värdet 1 kommer bytas ut mod basen. Potensnoder expanderas med hjälp av multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
-\[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
-Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
-\[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
-\subsubsection{Subtraktionsnod}
+Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens 0 förenklas till en nummernod med värdet ett. 
+\paragraph{Subtraktionsnod}
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a\), därmed måste subtraktionsnoden anta endast två barnnoder; en för vänster sida och en för höger sida. För att förenkla subtraktionsnoden implementeras inget nytt. Den använder sig istället av additions noden och multiplikations noden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs ekvationen om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{image-merged3.png}
   \caption{\(a-b\) före och efter förenkling. Minus noden transformeras till en additionsnod med b ersatt med \(b \cdot -1\)}
 \end{figure}
-\subsubsection{Divisionsnod}
+\paragraph{Divisionsnod}
 \label{subsubsec:divnode}
 På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((-1) \cdot b)\) så skriver divisionsnoden om ekvationen så att förenklingen istället kan hanteras av multiplikationsnoden. \(\frac{a}{b}\Rightarrow a \cdot (b^{-1})\)
 \begin{figure}[h!]
@@ -163,7 +165,7 @@ På samma sätt som subtraktionsnoden skiver om ekvationen \(a-b\Rightarrow a+((
   \includegraphics[width=0.5\textwidth]{image-merged4.png}
   \caption{\(a/b\) förenklas till \(a \cdot (b^{-1})\)}
 \end{figure}
-\subsubsection{Kvadratrotnoder}
+\paragraph{Kvadratrotnoder}
 \label{subsubsec:sqrtnod}
 För att föränkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x^{0.5}\)
 \begin{figure}[h!]
@@ -293,7 +295,7 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
     \(ax+b=0\) & Ja \\
     \(\frac{x}{a}=b\) & Ja \\
     \(ax^2+bx+c=0\) & Ja \\
-    \(\frac{a \cdot x^2}{b}+\frac{x \cdot c}{d}+\frac{e}/\frac{f}=g\) & Ja \\
+    \(\frac{a \cdot x^2}{b}+\frac{x \cdot c}{d}+\frac{e}{f}=g\) & Ja \\
     \((x+a)(x+b)=c\) & Ja \\
     \(\frac{(x+a)\cdot(x+b)}{c}+d=e\) & Ja \\
     \(x^a+b=c\) & Endast om \( a>0 \) \\
@@ -391,4 +393,3 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
 \end{figure}
 \end{appendices}
 \end{document}
-
