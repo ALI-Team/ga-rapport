@@ -71,7 +71,7 @@ Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n
 Ett exempel på binomialsatsen lyder:
 \[(a + b + c)^{3}=a^3+3a^2b+3a^2c+3ab^2+6abc+3ac^2+b^3+3b^2c+3bc^2+c^3\]
 %exempel
-
+\newpage
 \subsection{Klasser och Objekt}
 \label{subsection:klasserochobjekt}
 En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
@@ -155,6 +155,7 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [vä
     \texttt{*} & Multiplikationsnod \\
     \texttt{/} & Divisionsnod \\
     \texttt{\string^} & Potensnod \\
+    \texttt{\(\sqrt{}\)} & Kvadratrotsnod \\
     \texttt{=} & Ekvation
   \end{tabular}
   \captionof{table}{Vilka mönster som letas efter i indatan och vad de ersätts med i den lexikaliska analysen.}
@@ -164,6 +165,7 @@ Exempel: \(5x+10=20\Rightarrow\) ([värde, 5], [okänd, \(x\)], [addition], [vä
 \subsubsection{Parser}
 Parserns (svenska - tolk) uppgift i vårt projekt är att bygga upp ett syntaxträd av listan som skickades över från den lexikaliska analysen\footnote{Se \ref{subsubsec:lexikaliskanal} Lexikalisk analys}. Eftersom det är då strukturen på ekvationen byggs upp är det viktigt att räknesätten prioriteras på rätt sätt. Ordningen på räknesätten är förutbestämt i regler som parsern följer. När tokens definieras anges också vilken ordning de ska prioriteras.
 
+\newpage
 \subsection{Förenkling}
 Operatörsnoder vars subnoder endast består av numeriska värden räknas helt enkelt ihop med den operatorn som noden representerar. Då kommer denna operatörsnod ersättas med en nummernod som antar det ihopräknade värdet.
 \subsubsection{Homogena operatörsnoder}
@@ -218,10 +220,20 @@ Två eller flera potensnoder kan multipliceras genom att exponenterna adderas. D
   \includegraphics[width=0.8\textwidth]{image32}
   \caption{\((a + b) \cdot (c + b)\) förenklas till \((a \cdot b) + (b \cdot c) + (b ^ 2) + (a \cdot c)\)}
 \end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{pow.png}
+  \caption{\(x^{a} \cdot x^{b}\) blir förenklat till \(x^{a+b}\)}
+\end{figure}
 \subsubsection{Inhomogena noder}
 \paragraph{Potensnod}
 \label{subsubsec:potensnod}
-Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett och en potensnod med potensen ett förenklas till basnoden. Om basnoden i sin tur är en potensnod skapas en ny potensnod med potenserna ihopmultiplicerade som potens och basen på subnoden som bas.
+Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett och en potensnod med potensen ett förenklas till bara basnoden. Om potensnoder är staplade, dvs. basen av en potensnod består av en annan potensnod förenklas dessa till en enda potensnod vars exponentvärde består av produkten av de ursprungliga potensnodernas exponentvärden.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{pow2.png}
+  \caption{\( \left( a^b \right) ^c\) blir förenklat till \(a^{bc}\)}
+\end{figure}
 \paragraph{Subtraktionsnod}
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a, a \neq b\). Därmed måste subtraktionsnoden anta endast två subnoder; en för vänster term och en för höger term. För att förenkla subtraktionsnoden används additionsnoden och multiplikationsnoden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs uttrycket om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
@@ -237,10 +249,11 @@ På samma sätt som subtraktionsnoden skiver om uttrycket till en additionsnod s
   \includegraphics[width=0.5\textwidth]{image-merged4.png}
   \caption{\(\frac{a}{b}\) förenklas till \(a \cdot \left(b^{-1}\right)\)}
 \end{figure}
+\newpage
 \paragraph{Kvadratrotnoder}
 \label{subsubsec:sqrtnod}
 För att förenkla kvadratrotsnoder skrivs de om till potensnoder. \(\sqrt{x}=x^{\frac{1}{2}}\)
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{sqrt.png}
   \caption{\(\sqrt{x}\) förenklas till \(x^{\frac{1}{2}}\)}
@@ -320,7 +333,7 @@ Programmet kan lösa relativt avancerade ekvationer. Programmet är i första ha
   \captionof{table}{Ekvationer och om de kan lösas}
   \label{tab:lexer_patterns}
 \end{figure}
-
+\newpage
 \subsection{Arbetsprocess}
 \subsubsection{Python}
 Vi valde att skriva programmet i programmeringsspråket Python då det är allmänt enkelt att förstå och att arbeta med. Dessutom hade vi alla kunskap inom språket innan vi började med projektet.
@@ -361,7 +374,7 @@ Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken
 Proofwiki är en wiki för matematiska bevis. För att skriva och ändra krävs godkännande, medlemskap söks inte skapas. Den är fortfarande overifierad med eftersom informationen överensstämmer med britannica.
 \subsubsection{Python.org}
 Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt trovärdig. Dessutom är även den här typen av information antingen fungerande eller inte. 
-
+\newpage
 \begin{thebibliography}{9}
 
 \bibitem{kth}
@@ -412,6 +425,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \begin{tabular}{l|l|l}
     \textbf{Uttryck} & \textbf{Förklaring} & \textbf{Se} \\
     \hline
+    Träd & En riktad graf utan cykler & \ref{subsec:trees} \\
     Nod & En det av trädet & \ref{subsec:trees} \\
     Subnod & En nod under en annan nod & \ref{subsec:trees} \\
     Rotnod & Noden högs upp i trädet & \ref{subsec:trees} \\
