@@ -64,7 +64,7 @@ Inom datavetenskap beskrivs träd som en form av graf som används för att repr
 \subsubsection{Abstrakt syntaxträd}
 Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsection{Multinomialsatsen}
-För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
+För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder (ProofWiki, 2016):
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
@@ -260,7 +260,7 @@ Bilderna på träden som används relativt ofta i denna rapport är också del a
 \subsubsection{Struktur}
 Strukturen av projektet baserades till viss del på ett examensarbete vid namn \textit{Constructing a Computer Algebra System Capable of Generating Pedagogical Step-by-Step Solutions} skriven av Dimitrij Lioubartsev (KTH, 2016). Syftet med detta examensarbete är att modifiera ett existerande bibliotek för symbolhantering, SymPy, så att det kan generera stegen som krävs för att kunna lösa en ekvation. Detta var givetvis ej syftet med vårt gymnasiearbete, men examensarbetet gick in i detalj hur en symbolhanterare kan fungera (kapitel 3). Denna text användes som källa då den kändes relevant till vårt arbete. Vi kunde använda källan för inspiration för hur arbetet skulle läggas samt som exempel på hur själva rapporten kunde se ut.
 
-\subsubsection{Multinomial}
+\subsubsection{Multinomialsatsen}
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \section{Resultat}
@@ -371,6 +371,12 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \textit{Multinomial theorem},
   Britannica,
   [2018-02-18]
+
+\bibitem{proofwiki}
+  https://proofwiki.org/wiki/Multinomial\_Theorem
+  \textit{Multinomial Theorem},
+  ProofWiki,
+  [2018-03-11]
 
 \bibitem{dotdoc}
   http://www.graphviz.org/pdf/dotguide.pdf
