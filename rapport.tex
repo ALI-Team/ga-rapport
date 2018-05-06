@@ -62,7 +62,7 @@ För att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)
 \label{subsec:trees}
 Inom datavetenskap beskrivs träd som en form av graf som används för att representera hierarkisk data. Ett träd inom matematiken består av noder som är sammansatta på så vis att varje nod kan innefatta ett eller flera barn, som i sig också är noder. I det här dokumentet kallas barnen för subnoder. En subnods ``förälder'' kallas just så: förälder. Noder behöver dock ej innefatta några subnoder, dessa noder kallas för löv. Varje nod behöver dock anta ett värde. Om en nod inte har en förälder betyder det att denna nod är högst upp i trädet. Denna nod kallas för rotnod eller bara rot.
 \subsubsection{Abstrakt syntaxträd}
-Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
+Abstrakta syntaxträd är träd som representerar syntaxen av t.ex. ett språk. Det som gör trädet abstrakt är att det inte tar hänsyn till t.ex. parenteser eller mellanrum (Ranta, 2011). Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsection{Multinomialsatsen}
 För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
@@ -348,6 +348,8 @@ Algoritmen för potensnoden krävde att vi skulle känna till multinomialsatsen;
 Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen funkar en algoritm eller inte, det går inte att vinkla en algoritm. 
 \subsubsection{KTH}
 Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Examensarbetet kontrollerades av handledare och därför kan vi vara säkra på att källan är pålitlig. Dessutom är KTH ett väldigt välrespekterat universitet.
+\subsubsection{Chalmers}
+Informationen hämtades från anteckningar av en föreläsning på Chalmers, 2011 för information om abstrakta syntaxträd. Föreläsningen hölls av professorn Aarne Ranta, som också är avdelningschef för funktionel programmering på Chalmers.
 \subsubsection{Encyclopædia Britannica}
 Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken som finns. Informationen är skriven av experter och verifierad, det gör det till en bra källa. 
 \subsubsection{Proofwiki}
@@ -377,11 +379,18 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \textit{Graphviz dot dokumentation},
   [2018-02-10]
 
+\bibitem{chalmers}
+  http://www.cse.chalmers.se/edu/year/2011/course/TIN321/lectures/proglang-02.html
+  Aarne Ranta,
+  Chalmers,
+  2011
+  [2018-05-06]
+
 \bibitem{pythondoc}
   https://docs.python.org/3/
   \textit{Python dokumentation},
   Python Software Foundation ,
-  [2017-2018]
+  [2017-2018] 
 \end{thebibliography}
 \newpage
 \begin{appendices}
