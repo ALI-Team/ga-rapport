@@ -52,7 +52,7 @@ Eftersom vi alla i gruppen delar en stor passion för programmering ville vi gö
 \par
 Syftet med arbetet är att undersöka hur verktyg såsom WolframAlpha fungerar, dvs. hur inmatad data tolkas, hanteras och förenklas och utifrån det skriva ett bibliotek som kan förenkla uttryck och lösa ekvationer. Arbetet har utgått från följande frågeställningar:
 \begin{itemize}
-	\item Hur kan inmatad data tolkas och representeras som en trädstruktur?
+	\item Hur kan inmatad data representerad som trädstruktur tolkas och arbetas med av ett program?
 	\item Hur kan uttryck förenklas m.h.a. dessa trädstrukturer?
 	\item Hur kan algoritmer användas för att lösa ekvationer?
 \end{itemize}
@@ -262,11 +262,19 @@ Strukturen av projektet baserades till viss del på ett examensarbete vid namn \
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \section{Resultat}
-\subsection{Vilka förmågor innefattar biblioteket}
-\subsubsection{Förenkling}
+Programmet innefattar nu dessa förmågor:
+\begin{itemize}
+	\item Representera inmatad data som syntaxträd
+	\item Rekursivt förenkla operationer samt korrekt kunna hantera okända variabler för att förenkla uttryck.
+	\item Lösa ut okända variabler från ekvationer genom att använda olika metoder för olika ekvationsgrad.
+\end{itemize}
+
+\subsection{Vad kan biblioteket hantera}
+\subsubsection{Förenkling av uttryck}
 Programmet strävar efter att förenkla ekvationen så den blir omskriven på polynomform, vilket kan vara fördelaktigt i vissa situationer, dock inte alla. Exempelvis för ekvationen \((x-3) \cdot (x-5)=0\) är det uppenbart att rötterna är \(x=3, x=5\) men i polynomform \(x^{2}-8x+15=0\) blir ekvationen lite svårare att lösa. I det här fallet skulle programmet fortfarande kunna lösa ekvationen i polynomform, men om ekvationen var av tredje graden eller högre skulle detta inte vara fallet.
+\par Nedan visas en tabell över olika uttryck och om de kan förenklas (och vad de förenklas till.)
 \begin{savenotes}
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \begin{tabular}{l|l}
     \textbf{Uttryck} & \textbf{Förenklas till} \\
