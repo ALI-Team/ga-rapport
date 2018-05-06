@@ -125,6 +125,8 @@ Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner f�
     \texttt{simplified} & Bygger upp en nod som är en förenkling av sig själv. \\
     \texttt{eval} & Räknar ut värdet på en nod. \\
     \texttt{eq} & Jämför noder (samma struktur, variabler etc.) \\
+    \texttt{flattend} & ``plattar'' ihop ett träd \\
+    \texttt{eval} & räknar ut värdet av en nod \\
     \texttt{formatted} & Returnerar en text representation av noden.
   \end{tabular}
   \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
@@ -197,7 +199,7 @@ Om additionsnoder multipliceras kommer dessa lösas ut genom att kombinationer a
 \[ \Leftrightarrow \]
 \[ acef + adef + bcef + bdef \]
 Enhetsnoder med samma okänd kombineras genom att skapa en ny enhetsnod där enheten blir produkten av de enheterna för noderna och koefficienten produken av koefficienterna (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att multiplicera in i enhetsnodens koefficient.\par
-En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett.
+En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett. Två enhetsnoder med samma bas kan förenklas genom att adera exponenterna.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{image-merged}
@@ -216,7 +218,7 @@ En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma 
 \subsubsection{Inhomogena noder}
 \paragraph{Potensnod}
 \label{subsubsec:potensnod}
-Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett. 
+Potensnoder innehåller två subnoder, basen och exponenten. En potensnod kan ha vilken sorts nod som helst som basnod (bortsett från ekvationsnod), exempelvis \((a+b+c)^{3}\), där basnoden är en additionsnod. Om basnoden är en additionsnod kommer hela potensnoden förenklas m.h.a. multinomialsatsen, annars kommer basnoden förenklas separat, innan potensnoden förenklas. En potensnod med potens noll förenklas till en nummernod med värdet ett och en potensnod med potensen ett förenklas till basnoden. Om basnoden i sin tur är en potensnod skapas en ny potensnod med potenserna multiplicerade ihop som potens och basen på subnoden som bas.
 \paragraph{Subtraktionsnod}
 Subtraktionsnoden är ej en homogen nod då ordningen på termerna spelar roll, \(a-b\neq b-a, a \neq b\). Därmed måste subtraktionsnoden anta endast två subnoder; en för vänster term och en för höger term. För att förenkla subtraktionsnoden används additionsnoden och multiplikationsnoden för att uppnå en minusoperation. Istället för att direkt räkna ut \(a-b\) så skrivs uttrycket om till \(a+((-1)\cdot b)\). Därmed kan samma resultat uppnås med bara addition och multiplikation.
 \begin{figure}[h!]
@@ -374,8 +376,9 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
 
 \bibitem{dotdoc}
   http://www.graphviz.org/pdf/dotguide.pdf
+  Emden R. Gansner, Eleftherios Koutsofios och Stephen North
   \textit{Graphviz dot dokumentation},
-  [2018-02-10]
+  [2015-01-05]
 
 \bibitem{pythondoc}
   https://docs.python.org/3/
