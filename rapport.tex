@@ -62,9 +62,9 @@ För att tolka ekvationer som är skrivna på vanlig form (e.x. \(5x + 10 = 15\)
 \label{subsec:trees}
 Inom datavetenskap beskrivs träd som en form av graf som används för att representera hierarkisk data. Ett träd inom matematiken består av noder som är sammansatta på så vis att varje nod kan innefatta ett eller flera barn, som i sig också är noder. I det här dokumentet kallas barnen för subnoder. En subnods ``förälder'' kallas just så: förälder. Noder behöver dock ej innefatta några subnoder, dessa noder kallas för löv. Varje nod behöver dock anta ett värde. Om en nod inte har en förälder betyder det att denna nod är högst upp i trädet. Denna nod kallas för rotnod eller bara rot.
 \subsubsection{Abstrakt syntaxträd}
-Abstrakta syntaxträd är träd som representerar syntaxen av t.ex. ett språk. Det som gör trädet abstrakt är att det inte tar hänsyn till t.ex. parenteser eller mellanrum (Ranta, 2011). Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
+Abstrakta syntaxträd är träd som representerar syntaxen av t.ex. ett språk. Det som gör trädet abstrakt är att det inte tar hänsyn till t.ex. parenteser eller mellanrum (Ranta, 2011). Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsection{Multinomialsatsen}
-För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder (ProofWiki, 2016):
+För att utveckla potenser av multinom e.x: \[(a + b + c)^{3}=a^3+3a^2b+3a^2c+3ab^2+6abc+3ac^2+b^3+3b^2c+3bc^2+c^3\] används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder (ProofWiki, 2016):
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
@@ -200,7 +200,8 @@ Om additionsnoder multipliceras kommer dessa lösas ut genom att kombinationer a
 \[ \Leftrightarrow \]
 \[ acef + adef + bcef + bdef \]
 Enhetsnoder med samma okänd kombineras genom att skapa en ny enhetsnod där enheten blir produkten av de enheterna för noderna och koefficienten produken av koefficienterna (e.x. \(5x \cdot 10x = 50x^{2}\)). Enhetsnoder kan också kombineras med övriga noder genom att multiplicera in i enhetsnodens koefficient.\par
-En potensnod kan slås ihop med en annan nod om basen på potensnoden är samma som den andra noden, isåfall skapas en ny potensnoden med exponenten ökad med ett. Två enhetsnoder med samma bas kan förenklas genom att addera exponenterna.
+Om en potensnod multipliceras med en nod vars värde motsvarar potensnodens basvärde kan dessa slås samman genom att öka potensnodens exponentvärde med ett. Exempelvis \(a^{3} * a = a^{4}\).\par
+Två eller flera potensnoder kan multipliceras genom att exponenterna adderas. Detta gäller också för enhetsnoder om basen är samma. Exempelvis \(5^{3} * 5^{2} = 5^{5}\) och \(a^{3} * a^{2} = a^{5}\)
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{image-merged}
@@ -357,7 +358,7 @@ Det ligger i naturen hos mycket av den informationen vi använt oss av att den �
 \subsubsection{KTH}
 Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Examensarbetet kontrollerades av handledare och därför kan vi vara säkra på att källan är pålitlig. Dessutom är KTH ett väldigt välrespekterat universitet.
 \subsubsection{Chalmers}
-Informationen hämtades från anteckningar av en föreläsning på Chalmers, 2011 för information om abstrakta syntaxträd. Föreläsningen hölls av professorn Aarne Ranta, som också är avdelningschef för funktionel programmering på Chalmers.
+Informationen hämtades från anteckningar av en föreläsning på Chalmers, 2011 för information om abstrakta syntaxträd. Föreläsningen hölls av professorn Aarne Ranta, som också är avdelningschef för funktionell programmering på Chalmers.
 \subsubsection{Encyclopædia Britannica}
 Encyclopædia Britannica är ett av om inte det mest respekterade uppslagsverken som finns. Informationen är skriven av experter och verifierad, det gör det till en bra källa. 
 \subsubsection{Proofwiki}
