@@ -64,7 +64,7 @@ Inom datavetenskap beskrivs träd som en form av graf som används för att repr
 \subsubsection{Abstrakt syntaxträd}
 Abstrakta syntaxträd används oftast inom datavetenskap för att strukturera programmeringskod så att en kompilator kan omvandla källkoden till ett exekverbart program. Men på grund av likheterna mellan programmeringsspråkens syntax och matematiska ekvationer användes abstrakta syntaxträd i detta arbete.
 \subsection{Multinomialsatsen}
-För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder
+För att utveckla potenser av multinom (e.x. \((a + b + c)^{3}\)) används multinomialsatsen. Som man kan ana på namnet liknar multinomialsatsen binomialsatsen. Skillnaden är att multinomialsatsen är ett mer generaliserat sätt att beskriva utveckling av polynom, och är alltså ej begränsad till endast binom. Satsen lyder (ProofWiki, 2016):
 \[(a_{1}+a_{2}+\ldots+a_{m})^{n}=\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\binom{n}{k_{1},k_{2},\dots,k_{m}}a_{1}^{k_{1}}\cdot\ldots\cdot a_{m}^{k_{m}}\]
 Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n}\) menas alla möjliga kombinationer med återläggning av exponenter i \(a_{1}^{k_{1}}\cdot a_{2}^{k_{2}}\cdot\ldots\cdot a_{m}^{k_{m}}\) där \(\displaystyle\sum_{i=0}^{m}k_{i}=n\) uppfylls. Vidare behöver  \(\binom{n}{k_{1},k_{2},\ldots,k_{m}}\) förklaras. Detta kallas för \textit{multinomialtal} eller \textit{multinomialkoefficient}, som i sig en generalisering av binomialkoefficienten \(\binom{n}{k}\). Multinomialkoefficienten kan skrivas om på detta vis.
 \[\binom{n}{k_{1},k_{2},\ldots,k_{m}}=\frac{n!}{k_{1}!\cdot k_{2}!\cdot\ldots\cdot k_{m}!}\]
@@ -75,7 +75,7 @@ Den behöver dock lite förklaring. Med \(\displaystyle\sum_{k_{1}+\dots+k_{m}=n
 En viktig del av struktureringen av noder handlar om att en nod kan vara en utvidgad (eng. extended) typ av en annan nod. Det vill säga, istället för att på nytt skapa varje nod kan man istället skapa en allmän nod för t.ex. operatörer, och sedan utvidga den för varje sorts operation. Detta kallas för Objektorienterad Programmering (\textbf{O}bject \textbf{O}riented \textbf{P}rogramming, OOP). 
 \subsubsection{Objektorienterad programmering}
 \label{subsubsection:oop}
-Objektorienterad programmering funkar genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för egenskaper och funktioner. (Kan t.ex. liknas vid en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
+Objektorienterad programmering fungerar genom att man för varje föremål, struktur, etc. man vill beskriva i ett program har en s.k. klass. En klass är en abstrakt modellering av ett objekt; dvs. den innehåller definitioner för egenskaper och funktioner. (Kan t.ex. liknas vid en ritning; klassen innehåller information om strukturen, men är i sig inte en färdig produkt.). Sedan används klassen för att skapa objekt som kan fylla på med värden på attributerna och faktiskt utföra de beskrivna handlingarna. Ett exempel är att föreställa sig klassen Bil. I denna klass är det definierat att varje bil har t.ex en färg, maxhastighet, osv. Den har också vissa handlingar (alt. metoder) beskrivna; man kan köra bilen, tanka den, osv. Detta är beskrivningen av klassen Bil, och det är väldigt viktigt att komma ihåg att klassen, dvs. definitionen av bilen i sig ej är en bil. Istället skapas en instans av klassen bil; alltså kan man säga att objektet är skapat med klassen som ritning. Vi återvänder till Bil-exemplet och skapar ett objekt; en bil med färgen blå och maxhastighet 200 km/h. Denna teoretiska bil kan nu köras, tankas osv.
 \subsubsection{Subklasser och arv}
 Ett användbart redskap inom objektorienterad programmering är arv. För att fortsätta med bil-exemplet kan vi säga att klassen Bil är en subklass (dvs ärver från) klassen Fordon. Klassen Bil har då alla attributer och metoder som klassen Fordon har samt attributer och metoder som läggs till i definitionen av Bil. Klassen fordon kan exempelvis ha attributerna kan-flyga och bränsle-typ. Därmed kan en instans av klassen Bil anta värden för dessa attributer.
 \section{Metod}                                                                
@@ -105,9 +105,9 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste okända variable
 	\caption{\(2x^{2}\) representerat som en enhetsnod med enheten \(x^{2}\) och värdet \(2\). Med \textit{Unit} menas enhet.}
 	\label{fig:2132}
 \end{figure}
-\subsubsection{Noder i OOP}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass (se tabell \ref{tab:basenodefunc}). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
-\begin{figure}[h!]
+\subsubsection{Noder representerade som klasser}
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass. (Inte själva förenklingen men helt enkelt skapandet av en operatörsnod med subnoder.) Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
+\begin{figure}[H]
   \center
   \includegraphics[width=1\textwidth]{image20}
   \caption{Diagram av nodklassen samt dess alla subklasser.}
@@ -262,7 +262,7 @@ Bilderna på träden som används relativt ofta i denna rapport är också del a
 \subsubsection{Struktur}
 Strukturen av projektet baserades till viss del på ett examensarbete vid namn \textit{Constructing a Computer Algebra System Capable of Generating Pedagogical Step-by-Step Solutions} skriven av Dimitrij Lioubartsev (KTH, 2016). Syftet med detta examensarbete är att modifiera ett existerande bibliotek för symbolhantering, SymPy, så att det kan generera stegen som krävs för att kunna lösa en ekvation. Detta var givetvis ej syftet med vårt gymnasiearbete, men examensarbetet gick in i detalj hur en symbolhanterare kan fungera (kapitel 3). Denna text användes som källa då den kändes relevant till vårt arbete. Vi kunde använda källan för inspiration för hur arbetet skulle läggas samt som exempel på hur själva rapporten kunde se ut.
 
-\subsubsection{Multinomial}
+\subsubsection{Multinomialsatsen}
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \section{Resultat}
@@ -290,7 +290,7 @@ Programmet strävar efter att förenkla ekvationen så den blir omskriven på po
     \(\frac{a}{a}\) & 1 \\
     \((a+b+\ldots)^{k}\) & Utvecklas m.h.a. multinomialsatsen \\
     \(ak+am\) & \(a(k+m)\) \\
-    \(\frac{a+b}{c+d}\) & Programmer kraschar
+    \(\frac{a+b}{c+d}\) & Programmet kraschar
   \end{tabular}
   \captionof{table}{Uttryck och vad de förenklas till (om möjligt)}
   \label{tab:expressions}Vissa saknas
@@ -334,7 +334,7 @@ En kods komplexitet definieras som gränsvärdet av tiden det tar för programme
 \subsection{Kodstruktur}
 Kodstruktur är essentiellt för större projekt för att underlätta vidareutveckling. Därför delade vi upp projektet exempelvis i klasser. Under arbetets gång hjälpte det oss att förstå varandras kod.
 \par
-Strukturen var dock inte perfekt. Klasserna delades upp i varsin fil, och eftersom klasserna ofta behöver ha tillgång till andra klasser och dess metoder behöver dessa då importeras. Detta ledde till att om två klasser behövde tillgång till varandra (vilket hände i vårt fall) så skulle de importera varandra. Inom programmering kallas detta för circular import, och är allmänt dålig praxis, eftersom det ökar risken till att programmet helt enkelt inte funkar, eller att det t.ex. blir svårare att reorganisera projektet om det skulle behövas.
+Strukturen var dock inte perfekt. Klasserna delades upp i varsin fil, och eftersom klasserna ofta behöver ha tillgång till andra klasser och dess metoder behöver dessa då importeras. Detta ledde till att om två klasser behövde tillgång till varandra (vilket hände i vårt fall) så skulle de importera varandra. Inom programmering kallas detta för circular import, och är allmänt dålig praxis, eftersom det ökar risken till att programmet helt enkelt inte fungerar, eller att det t.ex. blir svårare att reorganisera projektet om det skulle behövas.
 \subsection{Möjliga förbättringar}
 Just nu kan biblioteket endast lösa ekvationer som är skrivna på polynomform, och endast upp till den andra graden. Dessvärre hanteras division på ett sätt som gör att vissa ekvationer (framförallt de som inkluderar division med en okänd variabel) ej går att lösas. Tyvärr inkluderar detta också trivialfallet \( \frac{x}{x} = 1 \). På grund av detta kan bibliotek ej heller utföra polynomdivision.
 \par
@@ -347,7 +347,7 @@ Vi har lärt oss essenserna av syntaxträd och hur man kan strukturera de, inklu
 Algoritmen för potensnoden krävde att vi skulle känna till multinomialsatsen; något som ingen av oss kände till innan projektet.
 
 \section{Källkritik}
-Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen funkar en algoritm eller inte, det går inte att vinkla en algoritm. 
+Det ligger i naturen hos mycket av den informationen vi använt oss av att den är väldigt lätt att verifiera. Antingen fungerar en algoritm eller inte, det går inte att vinkla en algoritm. 
 \subsubsection{KTH}
 Examensarbetet är skrivet år 2016 av Dimitrij Lioubartsev, student vid KTH. Examensarbetet kontrollerades av handledare och därför kan vi vara säkra på att källan är pålitlig. Dessutom är KTH ett väldigt välrespekterat universitet.
 \subsubsection{Encyclopædia Britannica}
@@ -373,6 +373,12 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \textit{Multinomial theorem},
   Britannica,
   [2018-02-18]
+
+\bibitem{proofwiki}
+  https://proofwiki.org/wiki/Multinomial\_Theorem
+  \textit{Multinomial Theorem},
+  ProofWiki,
+  [2018-03-11]
 
 \bibitem{dotdoc}
   http://www.graphviz.org/pdf/dotguide.pdf
@@ -419,10 +425,10 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \item Graphviz
   \item Feh
 \end{itemize}
-\subsection{\\Installations instruktioner}
+\subsection{\\Installationsinstruktioner}
 \begin{enumerate}
-  \item Ladda ner GAMLPs källkod från github \begin{verbatim}git clone https://github.com/ALI-Team/GAMLP.git\end{verbatim}
-  \item Kör installations skriptet setup.py (administratörs rättigheter kan behövas) \begin{verbatim}python(3) setup.py install\end{verbatim}
+  \item Ladda ner GAMLPs källkod från github \begin{verbatim}$ git clone https://github.com/ALI-Team/GAMLP.git\end{verbatim}
+  \item Kör installationsskriptet setup.py (administratörsrättigheter kan behövas) \begin{verbatim}# python(3) setup.py install\end{verbatim}
 \end{enumerate}
 \subsection{\\Använding av programmet}
 Biblioteket kommer med ett program för att enkelt kunna testa/använda det. Kör ``gamlp'' i terminalen för att starta det.\\
