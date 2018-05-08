@@ -97,7 +97,7 @@ Varje nod måste anta ett värde. Med detta menas ett numeriskt värde (e.x. \(5
 Operatörsnoder är noder som representerar operationer och kräver därför subnoder. Exempel på operatörsnoder är additionsnod, som representerar addition mellan två eller flera noder och divisionsnod, som representerar division mellan två noder.
 \paragraph{Homogena och inhomogena operatörsnoder}
 \label{subsec:operator}
-Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom när dessa representeras som en trädstruktur kan går det inte urskilja mellan t.ex. \(a - b - c\) och \(a - c - b\).
+Homogena operatörsnoder representerar operationer där ordningen av värdena ej spelar någon roll, exempelvis \(a + b + c = b + c + a\). Detta betyder att homogena noder inte behöver ha en strikt vänsternod och högernod, utan kan istället lagra subnoderna som en lista. Därmed kan en operatörsnod ha ett godtyckligt antal subnoder. Inhomogena operatörsnoder representerar operationer där ordningen spelar roll, som t.ex. minus (\(a - b \neq b - a\)). Detta betyder att inhomogena operatörsnoder endast kan ha två subnoder, eftersom måste ha en strikt defenition för vänster och höger nod.
 \paragraph{Enhetsnoder}
 Eftersom programmet ska kunna hantera ekvationslösning, måste okända variabler kunna representeras (e.x. \(5x + 10 = 20\). Här är \(x\), en okänd varaibel.) För att representera variabler används en speciell typ av nod: en så kallad enhetsnod. Denna nod antar ett värde för koefficienten och en representation av den okända variabeln, en så kallad enhet. Denna enhet består av själva variabeln och vilken grad som den representeras i. Se Figur \ref{fig:2132} för en visuell representation av \(2x^{2}\) som en enhetsnod.
 \begin{figure}[H]
@@ -108,12 +108,7 @@ Eftersom programmet ska kunna hantera ekvationslösning, måste okända variable
 	\label{fig:2132}
 \end{figure}
 \subsubsection{Noder representerade som klasser}
-Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla subklasser. T.ex. så hanteras operationer av noder (e.x. addition, subtraktion) av denna klass. (Inte själva förenklingen men helt enkelt skapandet av en operatörsnod med subnoder.) Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
-\begin{figure}[H]
-  \center
-  \includegraphics[width=1\textwidth]{image20}
-  \caption{Diagram av nodklassen samt dess alla subklasser.}
-\end{figure}
+Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner för funktioner som används av och är gemensamma för alla typer av noder(se tabel:\ref{tab:basenodefunc} för en lista). Alla operatörsnoder är subklasser av klassen operatörsnod. Operatörsnoden har dock ingen funktion i sig, utan används för att enklare urskilja vilka noder som är operatörsnoder och vilka som inte är. Därefter grupperas additionsnodens och multiplikationsnodens klass som var sin subklass av klassen honomgen operatörsnod. Detta gjordes eftersom både multiplikationsnoden och additionsnoden är homogena noder.
 
 \begin{figure}[h!]
   \centering
@@ -132,6 +127,12 @@ Alla noder är subklasser av klassen Nod. Nodklassen innehåller definitioner f�
     \texttt{formatted} & Returnerar en text representation av noden.
   \end{tabular}
   \captionof{table}{Funktioner och dess användning i basklassen nod.} \label{tab:basenodefunc}
+\end{figure}
+
+\begin{figure}[H]
+  \center
+  \includegraphics[width=1\textwidth]{image20}
+  \caption{Diagram av nodklassen samt dess alla subklasser.}
 \end{figure}
 
 \subsection{Tolkning av inmatade ekvationer}
@@ -187,7 +188,7 @@ Första steget i förenklingen är att ``platta ut'' ett träd av homogena noder
   \label{fig:2312}
 \end{figure}
 \paragraph{Additionsnod}
-Nummeriska värden summeras, \(5 + 10 \Rightarrow 15\) och enhetsnoder kombineras genom att dess koeficient sätts baserat på antalet, exempelvis \(x + x + x = 3x\), eller \(5x + 3x = 8x\), se Figur \ref{fig:2321}.
+Nummeriska värden summeras, \(5 + 10 \Rightarrow 15\) och enhetsnoder kombineras genom att dess koeficient sätts baserat på antalet, exempelvis \(x + x + x = 3x\), eller \(5x + 3x + 10 + 2=8x + 12\), se Figur \ref{fig:2321}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{image-merged2}
@@ -282,7 +283,7 @@ Strukturen av projektet baserades till viss del på ett examensarbete vid namn \
 Förenkling av uttryck på formen \((x_{1}+x_{2}+...+x_{k})^{m}\) görs med multinomialsatsen. Då vi endast jobbat med ett specialfall av den här formen på uttryck, binomial, behövde vi hitta ett sätt att förenkla uttryck på den allmänna formen. Sidan om Multinomial Theorem på Proof Wiki var till stor hjälp och kunde även verifieras mot Encyclopædia Britannicas sida om samma ämne. Proof Wikis sida innehöll mer information och var till större nytta.
 
 \section{Resultat}
-Programmet innefattar nu dessa förmågor:
+Programmet har nu dessa funktioner:
 \begin{itemize}
 	\item Representera inmatad data som syntaxträd
 	\item Rekursivt förenkla operationer samt korrekt kunna hantera okända variabler för att förenkla uttryck.
