@@ -8,6 +8,7 @@
 \usepackage{float}
 \usepackage{footnote}
 \usepackage[toc,page]{appendix}
+\usepackage{tabularx}
 
 \graphicspath{ {images/} }
 
@@ -272,6 +273,7 @@ Dessa metoder används för att bestämma värdet på en enhetsnod från en ekva
 \(a\cdot x^{b}+k=0\Leftrightarrow x=(\frac{-k}{a})^{\frac{1}{b}}\)
 
 \subsection{Bilder på träd}
+\label{subsection:bilder}
 Bilderna på träden som används relativt ofta i denna rapport är också del av GAMLP, som har möjligheten att generera bilder av träd. Dessa genereras med hjälp av biblioteket \textit{graphviz}. För varje träd går programmet igenom trädet uppifrån och ner och skapar listor med alla noder och kanter. Programmet skriver sedan kod med \textit{dotsyntax}, som sedan tolkas av programmet \textit{dot} för att generera en bild på trädet.
 
 \subsection{Källor}
@@ -421,7 +423,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
 \section{\\Begrepp}
 \begin{figure}[h!]
   \centering
-  \begin{tabular}{l|l|l}
+  \begin{tabularx}{\textwidth}{l|X|l}
     \textbf{Uttryck} & \textbf{Förklaring} & \textbf{Se} \\
     \hline
     Träd & En riktad graf utan cykler där noder har endast en förälder & \ref{subsec:trees} \\
@@ -435,7 +437,8 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
     Parser & Gör om en lista av tokens till ett träd med avsende till prioritet & \ref{subsubsec:lexikaliskanal} \\
     Object & Har metoder och egenskaper & \ref{subsubsection:oop} \\
     Klass & Ritning för ett objekt & \ref{subsubsection:oop} \\
-  \end{tabular}
+    Dotsyntax & Programmeringsspråk som används av biblioteket graphviz för att generera bilder på träd & \ref{subsection:bilder}
+  \end{tabularx}
 \end{figure}
 \section{\\Hur man använder biblioteket/programmet}
 \subsection{\\Installationskrav}
@@ -455,7 +458,7 @@ Python.org är skrivit av Pythons utvecklare, och det gör informationen extremt
   \item Ladda ner GAMLPs källkod från github \begin{verbatim}$ git clone https://github.com/ALI-Team/GAMLP.git\end{verbatim}
   \item Kör installationsskriptet setup.py (administratörsrättigheter kan behövas) \begin{verbatim}# python(3) setup.py install\end{verbatim}
 \end{enumerate}
-\subsection{\\Använding av programmet}
+\subsection{\\Anxvänding av programmet}
 Biblioteket kommer med ett program för att enkelt kunna testa/använda det. Kör ``gamlp'' i terminalen för att starta det.\\
 Utryck kan sedan direkt matas in i programmet som kommer bearbeta den inmatade datan utifrån olika regler, som i GAMLP kallas för \textit{flaggor}. Vilka flaggor som är tillgängliga fås av kommandot ``flags'' (exempel på flaggor kan vara t.ex. generera en bild på trädet.)  För att ändra på en flagga används kommandot ``set [namn] [on/off]''.
 \end{appendices}
